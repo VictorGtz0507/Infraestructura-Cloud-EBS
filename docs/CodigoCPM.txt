@@ -1,0 +1,276 @@
+digraph CPM_Project {
+    rankdir=LR;
+    node [shape=plain, fontsize=10];
+    
+    // --- LEYENDA Y ESTRUCTURA DE NODO ---
+    subgraph cluster_legend {
+        label="Leyenda y Estructura de Nodo";
+        bgcolor="lightgrey";
+        fontsize=12;
+        
+        LegendAndSample [
+            shape=plain,
+            label=<
+                <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="8">
+                    <TR>
+                        <TD>
+                            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>ID</B></TD><TD ALIGN="LEFT">Identificador único de la Tarea</TD></TR>
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>D</B></TD><TD ALIGN="LEFT">Duración estimada en días</TD></TR>
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>ES</B></TD><TD ALIGN="LEFT">Early Start (Inicio más Temprano)</TD></TR>
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>EF</B></TD><TD ALIGN="LEFT">Early Finish (Fin más Temprano)</TD></TR>
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>LS</B></TD><TD ALIGN="LEFT">Late Start (Inicio más Tardío)</TD></TR>
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>LF</B></TD><TD ALIGN="LEFT">Late Finish (Fin más Tardío)</TD></TR>
+                                <TR><TD BGCOLOR="lightyellow" ALIGN="LEFT"><B>Slack</B></TD><TD ALIGN="LEFT">Holgura (Tiempo de flotación)</TD></TR>
+                            </TABLE>
+                        </TD>
+                    </TR>
+                    <TR><TD ALIGN="CENTER"><BR/><B>Ejemplo de Nodo de Actividad</B></TD></TR>
+                    <TR>
+                        <TD ALIGN="CENTER">
+                            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="khaki" WIDTH="150">
+                               <TR><TD>ES</TD><TD>D</TD><TD>EF</TD></TR>
+                               <TR><TD COLSPAN="3" BGCOLOR="lightgoldenrodyellow"><B>ID: Nombre de Tarea</B></TD></TR>
+                               <TR><TD>LS</TD><TD>Slack</TD><TD>LF</TD></TR>
+                            </TABLE>
+                        </TD>
+                    </TR>
+                </TABLE>
+            >
+        ];
+    }
+
+    // --- Nodos de Inicio y Fin ---
+    Inicio [shape=ellipse, style=filled, fillcolor=limegreen];
+    Fin [shape=ellipse, style=filled, fillcolor=limegreen];
+
+    // --- Definición de Nodos (Tareas) ---
+
+    // Nodos Fuera de la Ruta Crítica (Slack > 0)
+    T1A_Amplify [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>4</TD><TD>4</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S1A.1</B><BR/>Configurar AWS Amplify Hosting</TD></TR>
+            <TR><TD>2</TD><TD>2</TD><TD>6</TD></TR>
+        </TABLE>>];
+    T1A_RDS [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>5</TD><TD>5</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S1A.3</B><BR/>Instancia RDS + Secrets</TD></TR>
+            <TR><TD>50</TD><TD>50</TD><TD>55</TD></TR>
+        </TABLE>>];
+    T1B_UILogin [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>5</TD><TD>5</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S1B.1</B><BR/>UI de login en React</TD></TR>
+            <TR><TD>114</TD><TD>114</TD><TD>119</TD></TR>
+        </TABLE>>];
+    S2_ExamsTable [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>5</TD><TD>4</TD><TD>9</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S2.1</B><BR/>Tabla Exams en RDS</TD></TR>
+            <TR><TD>55</TD><TD>50</TD><TD>59</TD></TR>
+        </TABLE>>];
+    S2_LambdaExam [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>9</TD><TD>4</TD><TD>13</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S2.2</B><BR/>Lambda ExamService</TD></TR>
+            <TR><TD>59</TD><TD>50</TD><TD>63</TD></TR>
+        </TABLE>>];
+    S2_UIQuest [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>8</TD><TD>8</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S2.3</B><BR/>UI de cuestionarios</TD></TR>
+            <TR><TD>111</TD><TD>111</TD><TD>119</TD></TR>
+        </TABLE>>];
+    S2_ScoreLogic [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>13</TD><TD>3</TD><TD>16</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S2.4</B><BR/>Lógica de score</TD></TR>
+            <TR><TD>63</TD><TD>50</TD><TD>66</TD></TR>
+        </TABLE>>];
+    S2_Integration [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>16</TD><TD>4</TD><TD>20</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S2.5</B><BR/>Integración UI-Backend</TD></TR>
+            <TR><TD>107</TD><TD>91</TD><TD>111</TD></TR>
+        </TABLE>>];
+    S3_LambdaCert [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>16</TD><TD>5</TD><TD>21</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S3.1</B><BR/>Lambda Certificados</TD></TR>
+            <TR><TD>113</TD><TD>97</TD><TD>118</TD></TR>
+        </TABLE>>];
+    S3_UIDownload [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>21</TD><TD>2</TD><TD>23</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S3.2</B><BR/>UI descarga certificado</TD></TR>
+            <TR><TD>118</TD><TD>97</TD><TD>120</TD></TR>
+        </TABLE>>];
+    S3_UIProgress [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>9</TD><TD>9</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S3.3</B><BR/>Barra de progreso</TD></TR>
+            <TR><TD>111</TD><TD>111</TD><TD>120</TD></TR>
+        </TABLE>>];
+    S3_BackendProgress [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>16</TD><TD>5</TD><TD>21</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S3.4</B><BR/>Backend de progreso</TD></TR>
+            <TR><TD>66</TD><TD>50</TD><TD>71</TD></TR>
+        </TABLE>>];
+    S3_Compare [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>21</TD><TD>4</TD><TD>25</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S3.5</B><BR/>Comparación de progreso</TD></TR>
+            <TR><TD>116</TD><TD>95</TD><TD>120</TD></TR>
+        </TABLE>>];
+    S4_LambdaNotif [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>6</TD><TD>6</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S4.1</B><BR/>Lambda Notificaciones</TD></TR>
+            <TR><TD>108</TD><TD>108</TD><TD>114</TD></TR>
+        </TABLE>>];
+    S4_UINotif [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>6</TD><TD>6</TD><TD>12</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S4.2</B><BR/>UI preferencias</TD></TR>
+            <TR><TD>114</TD><TD>108</TD><TD>120</TD></TR>
+        </TABLE>>];
+    S4_ForoBackend [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>4</TD><TD>4</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S4.3</B><BR/>Foro de comentarios (backend)</TD></TR>
+            <TR><TD>113</TD><TD>113</TD><TD>117</TD></TR>
+        </TABLE>>];
+    S4_ForoUI [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>4</TD><TD>4</TD><TD>8</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S4.4</B><BR/>Foro de comentarios (UI)</TD></TR>
+            <TR><TD>117</TD><TD>113</TD><TD>121</TD></TR>
+        </TABLE>>];
+    S4_ModoConcentracion [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>0</TD><TD>6</TD><TD>6</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S4.5</B><BR/>Modo concentración UI</TD></TR>
+            <TR><TD>115</TD><TD>115</TD><TD>121</TD></TR>
+        </TABLE>>];
+    S5_TestBackend [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>34</TD><TD>4</TD><TD>38</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S5.2</B><BR/>Pruebas backend</TD></TR>
+            <TR><TD>81</TD><TD>47</TD><TD>85</TD></TR>
+        </TABLE>>];
+    S5_TestFrontend [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="lightblue">
+            <TR><TD>34</TD><TD>4</TD><TD>38</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="skyblue"><B>S5.3</B><BR/>Pruebas frontend e2e</TD></TR>
+            <TR><TD>81</TD><TD>47</TD><TD>85</TD></TR>
+        </TABLE>>];
+    
+    // Nodos en la Ruta Crítica (Slack = 0)
+    T1A_APIGateway [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>0</TD><TD>6</TD><TD>6</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S1A.2</B><BR/>API Gateway + Lambda</TD></TR>
+            <TR><TD>0</TD><TD>0</TD><TD>6</TD></TR>
+        </TABLE>>];
+    T1A_Cognito [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>6</TD><TD>5</TD><TD>11</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S1A.4</B><BR/>Configurar User Pool Cognito</TD></TR>
+            <TR><TD>6</TD><TD>0</TD><TD>11</TD></TR>
+        </TABLE>>];
+    T1B_MFA [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>11</TD><TD>5</TD><TD>16</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S1B.2</B><BR/>Configurar MFA en Cognito</TD></TR>
+            <TR><TD>11</TD><TD>0</TD><TD>16</TD></TR>
+        </TABLE>>];
+    T1B_Roles [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>16</TD><TD>5</TD><TD>21</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S1B.3</B><BR/>Definir roles Alumno/Admin</TD></TR>
+            <TR><TD>16</TD><TD>0</TD><TD>21</TD></TR>
+        </TABLE>>];
+    T1B_JWT [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>21</TD><TD>4</TD><TD>25</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S1B.4</B><BR/>Validar roles con JWT</TD></TR>
+            <TR><TD>21</TD><TD>0</TD><TD>25</TD></TR>
+        </TABLE>>];
+    S5_CICD [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>25</TD><TD>7</TD><TD>32</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S5.1</B><BR/>CI/CD pipeline</TD></TR>
+            <TR><TD>25</TD><TD>0</TD><TD>32</TD></TR>
+        </TABLE>>];
+    S5_DeployStaging [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>32</TD><TD>2</TD><TD>34</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S5.4</B><BR/>Deploy en Staging</TD></TR>
+            <TR><TD>32</TD><TD>0</TD><TD>34</TD></TR>
+        </TABLE>>];
+    S5_DemoBeta [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>34</TD><TD>2</TD><TD>36</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S5.5</B><BR/>Demo Beta con stakeholders</TD></TR>
+            <TR><TD>34</TD><TD>0</TD><TD>36</TD></TR>
+        </TABLE>>];
+    S6_DeployProd [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>36</TD><TD>5</TD><TD>41</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S6.1</B><BR/>Deploy a Producción</TD></TR>
+            <TR><TD>36</TD><TD>0</TD><TD>41</TD></TR>
+        </TABLE>>];
+    S6_CloudWatch [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>41</TD><TD>5</TD><TD>46</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S6.2</B><BR/>CloudWatch métricas + alarmas</TD></TR>
+            <TR><TD>41</TD><TD>0</TD><TD>46</TD></TR>
+        </TABLE>>];
+    S6_Capacitacion [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>46</TD><TD>5</TD><TD>51</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S6.3</B><BR/>Capacitación a usuarios</TD></TR>
+            <TR><TD>46</TD><TD>0</TD><TD>51</TD></TR>
+        </TABLE>>];
+    S6_Hotfixes [label=<
+        <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" BGCOLOR="tomato">
+            <TR><TD>51</TD><TD>11</TD><TD>62</TD></TR>
+            <TR><TD COLSPAN="3" BGCOLOR="lightcoral"><B>S6.4</B><BR/>Hotfixes / iteraciones rápidas</TD></TR>
+            <TR><TD>51</TD><TD>0</TD><TD>62</TD></TR>
+        </TABLE>>];
+        
+    // --- Definición de Dependencias (Flechas) ---
+    Inicio -> {T1A_Amplify, T1A_APIGateway, T1A_RDS, T1B_UILogin, S2_UIQuest, S3_UIProgress, S4_LambdaNotif, S4_ForoBackend, S4_ModoConcentracion};
+
+    T1A_Amplify -> T1A_Cognito;
+    T1A_APIGateway -> T1A_Cognito;
+    T1A_RDS -> S2_ExamsTable;
+    T1A_RDS -> S3_BackendProgress;
+    T1A_Cognito -> T1B_MFA;
+    T1B_MFA -> T1B_Roles;
+    T1B_Roles -> T1B_JWT;
+    T1B_JWT -> S5_CICD;
+
+    S2_ExamsTable -> S2_LambdaExam;
+    S2_LambdaExam -> S2_ScoreLogic;
+    S2_ScoreLogic -> {S2_Integration, S3_LambdaCert, S3_BackendProgress};
+
+    S3_LambdaCert -> S3_UIDownload;
+    S3_BackendProgress -> S3_Compare;
+
+    S4_LambdaNotif -> S4_UINotif;
+    S4_ForoBackend -> S4_ForoUI;
+
+    S5_CICD -> {S5_TestBackend, S5_TestFrontend, S5_DeployStaging};
+    S5_DeployStaging -> S5_DemoBeta;
+    S5_DemoBeta -> S6_DeployProd;
+
+    S6_DeployProd -> {S6_CloudWatch};
+    S6_CloudWatch -> S6_Capacitacion;
+    S6_Capacitacion -> S6_Hotfixes;
+
+    {T1B_UILogin, S2_Integration, S3_UIDownload, S3_Compare, S3_UIProgress, S4_UINotif, S4_ForoUI, S4_ModoConcentracion, S5_TestBackend, S5_TestFrontend, S6_Hotfixes} -> Fin;
+}

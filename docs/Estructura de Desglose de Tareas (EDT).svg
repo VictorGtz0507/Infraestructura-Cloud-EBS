@@ -1,0 +1,537 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640pt" height="2514pt" viewBox="0.00 0.00 640.00 2514.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 2510.4)">
+<title>EDT_Proyecto_Sprints</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-2510.4 636.47,-2510.4 636.47,4 -4,4"/>
+<!-- Proyecto -->
+<g id="node1" class="node">
+<title>Proyecto</title>
+<path fill="lightblue" stroke="black" d="M137.07,-1098C137.07,-1098 12,-1098 12,-1098 6,-1098 0,-1092 0,-1086 0,-1086 0,-1068.4 0,-1068.4 0,-1062.4 6,-1056.4 12,-1056.4 12,-1056.4 137.07,-1056.4 137.07,-1056.4 143.07,-1056.4 149.07,-1062.4 149.07,-1068.4 149.07,-1068.4 149.07,-1086 149.07,-1086 149.07,-1092 143.07,-1098 137.07,-1098"/>
+<text xml:space="preserve" text-anchor="middle" x="74.53" y="-1081.4" font-family="Arial" font-size="14.00">Proyecto General</text>
+<text xml:space="preserve" text-anchor="middle" x="74.53" y="-1064.6" font-family="Arial" font-size="14.00">Plataforma Educativa</text>
+</g>
+<!-- S1 -->
+<g id="node2" class="node">
+<title>S1</title>
+<path fill="lightblue" stroke="black" d="M389.27,-2178C389.27,-2178 228.4,-2178 228.4,-2178 222.4,-2178 216.4,-2172 216.4,-2166 216.4,-2166 216.4,-2148.4 216.4,-2148.4 216.4,-2142.4 222.4,-2136.4 228.4,-2136.4 228.4,-2136.4 389.27,-2136.4 389.27,-2136.4 395.27,-2136.4 401.27,-2142.4 401.27,-2148.4 401.27,-2148.4 401.27,-2166 401.27,-2166 401.27,-2172 395.27,-2178 389.27,-2178"/>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-2161.4" font-family="Arial" font-size="14.00">Sprint 1</text>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-2144.6" font-family="Arial" font-size="14.00">Infraestructura y Seguridad</text>
+</g>
+<!-- Proyecto&#45;&gt;S1 -->
+<g id="edge1" class="edge">
+<title>Proyecto-&gt;S1</title>
+<path fill="none" stroke="black" d="M149.37,-1094.67C186.06,-1094.67 222.47,-1094.67 222.47,-1094.67 222.47,-1094.67 222.47,-2124.46 222.47,-2124.46"/>
+<polygon fill="black" stroke="black" points="218.97,-2124.46 222.47,-2134.46 225.97,-2124.46 218.97,-2124.46"/>
+</g>
+<!-- S2 -->
+<g id="node3" class="node">
+<title>S2</title>
+<path fill="lightblue" stroke="black" d="M363.59,-1658C363.59,-1658 254.08,-1658 254.08,-1658 248.08,-1658 242.08,-1652 242.08,-1646 242.08,-1646 242.08,-1628.4 242.08,-1628.4 242.08,-1622.4 248.08,-1616.4 254.08,-1616.4 254.08,-1616.4 363.59,-1616.4 363.59,-1616.4 369.59,-1616.4 375.59,-1622.4 375.59,-1628.4 375.59,-1628.4 375.59,-1646 375.59,-1646 375.59,-1652 369.59,-1658 363.59,-1658"/>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-1641.4" font-family="Arial" font-size="14.00">Sprint 2</text>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-1624.6" font-family="Arial" font-size="14.00">Evaluaciones Core</text>
+</g>
+<!-- Proyecto&#45;&gt;S2 -->
+<g id="edge2" class="edge">
+<title>Proyecto-&gt;S2</title>
+<path fill="none" stroke="black" d="M74.47,-1098.47C74.47,-1200.76 74.47,-1637.2 74.47,-1637.2 74.47,-1637.2 230.16,-1637.2 230.16,-1637.2"/>
+<polygon fill="black" stroke="black" points="230.16,-1640.7 240.16,-1637.2 230.16,-1633.7 230.16,-1640.7"/>
+</g>
+<!-- S3 -->
+<g id="node4" class="node">
+<title>S3</title>
+<path fill="lightblue" stroke="black" d="M377.59,-1258C377.59,-1258 240.09,-1258 240.09,-1258 234.09,-1258 228.09,-1252 228.09,-1246 228.09,-1246 228.09,-1228.4 228.09,-1228.4 228.09,-1222.4 234.09,-1216.4 240.09,-1216.4 240.09,-1216.4 377.59,-1216.4 377.59,-1216.4 383.59,-1216.4 389.59,-1222.4 389.59,-1228.4 389.59,-1228.4 389.59,-1246 389.59,-1246 389.59,-1252 383.59,-1258 377.59,-1258"/>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-1241.4" font-family="Arial" font-size="14.00">Sprint 3</text>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-1224.6" font-family="Arial" font-size="14.00">Certificados y Progreso</text>
+</g>
+<!-- Proyecto&#45;&gt;S3 -->
+<g id="edge3" class="edge">
+<title>Proyecto-&gt;S3</title>
+<path fill="none" stroke="black" d="M149.52,-1091.33C217.94,-1091.33 308.47,-1091.33 308.47,-1091.33 308.47,-1091.33 308.47,-1204.48 308.47,-1204.48"/>
+<polygon fill="black" stroke="black" points="304.97,-1204.48 308.47,-1214.48 311.97,-1204.48 304.97,-1204.48"/>
+</g>
+<!-- S4 -->
+<g id="node5" class="node">
+<title>S4</title>
+<path fill="lightblue" stroke="black" d="M398.61,-938C398.61,-938 219.07,-938 219.07,-938 213.07,-938 207.07,-932 207.07,-926 207.07,-926 207.07,-908.4 207.07,-908.4 207.07,-902.4 213.07,-896.4 219.07,-896.4 219.07,-896.4 398.61,-896.4 398.61,-896.4 404.61,-896.4 410.61,-902.4 410.61,-908.4 410.61,-908.4 410.61,-926 410.61,-926 410.61,-932 404.61,-938 398.61,-938"/>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-921.4" font-family="Arial" font-size="14.00">Sprint 4</text>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-904.6" font-family="Arial" font-size="14.00">Notificaciones &amp; Interactividad</text>
+</g>
+<!-- Proyecto&#45;&gt;S4 -->
+<g id="edge4" class="edge">
+<title>Proyecto-&gt;S4</title>
+<path fill="none" stroke="black" d="M149.41,-1061.4C181.38,-1061.4 211.47,-1061.4 211.47,-1061.4 211.47,-1061.4 211.47,-949.99 211.47,-949.99"/>
+<polygon fill="black" stroke="black" points="214.97,-949.99 211.47,-939.99 207.97,-949.99 214.97,-949.99"/>
+</g>
+<!-- S5 -->
+<g id="node6" class="node">
+<title>S5</title>
+<path fill="lightblue" stroke="black" d="M361.26,-554C361.26,-554 256.42,-554 256.42,-554 250.42,-554 244.42,-548 244.42,-542 244.42,-542 244.42,-524.4 244.42,-524.4 244.42,-518.4 250.42,-512.4 256.42,-512.4 256.42,-512.4 361.26,-512.4 361.26,-512.4 367.26,-512.4 373.26,-518.4 373.26,-524.4 373.26,-524.4 373.26,-542 373.26,-542 373.26,-548 367.26,-554 361.26,-554"/>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-537.4" font-family="Arial" font-size="14.00">Sprint 5</text>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-520.6" font-family="Arial" font-size="14.00">Integración y Beta</text>
+</g>
+<!-- Proyecto&#45;&gt;S5 -->
+<g id="edge5" class="edge">
+<title>Proyecto-&gt;S5</title>
+<path fill="none" stroke="black" d="M99.47,-1056.21C99.47,-956.23 99.47,-533.2 99.47,-533.2 99.47,-533.2 232.51,-533.2 232.51,-533.2"/>
+<polygon fill="black" stroke="black" points="232.51,-536.7 242.51,-533.2 232.51,-529.7 232.51,-536.7"/>
+</g>
+<!-- S6 -->
+<g id="node7" class="node">
+<title>S6</title>
+<path fill="lightblue" stroke="black" d="M366.3,-210C366.3,-210 251.37,-210 251.37,-210 245.37,-210 239.37,-204 239.37,-198 239.37,-198 239.37,-180.4 239.37,-180.4 239.37,-174.4 245.37,-168.4 251.37,-168.4 251.37,-168.4 366.3,-168.4 366.3,-168.4 372.3,-168.4 378.3,-174.4 378.3,-180.4 378.3,-180.4 378.3,-198 378.3,-198 378.3,-204 372.3,-210 366.3,-210"/>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-193.4" font-family="Arial" font-size="14.00">Sprint 6</text>
+<text xml:space="preserve" text-anchor="middle" x="308.84" y="-176.6" font-family="Arial" font-size="14.00">Producción y Cierre</text>
+</g>
+<!-- Proyecto&#45;&gt;S6 -->
+<g id="edge6" class="edge">
+<title>Proyecto-&gt;S6</title>
+<path fill="none" stroke="black" d="M49.47,-1056.13C49.47,-921.65 49.47,-189.2 49.47,-189.2 49.47,-189.2 227.48,-189.2 227.48,-189.2"/>
+<polygon fill="black" stroke="black" points="227.48,-192.7 237.48,-189.2 227.48,-185.7 227.48,-192.7"/>
+</g>
+<!-- S1_T1 -->
+<g id="node8" class="node">
+<title>S1_T1</title>
+<path fill="lightblue" stroke="black" d="M597.11,-2506.4C597.11,-2506.4 503.96,-2506.4 503.96,-2506.4 497.96,-2506.4 491.96,-2500.4 491.96,-2494.4 491.96,-2494.4 491.96,-2460 491.96,-2460 491.96,-2454 497.96,-2448 503.96,-2448 503.96,-2448 597.11,-2448 597.11,-2448 603.11,-2448 609.11,-2454 609.11,-2460 609.11,-2460 609.11,-2494.4 609.11,-2494.4 609.11,-2500.4 603.11,-2506.4 597.11,-2506.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2489.8" font-family="Arial" font-size="14.00">1.1</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2473" font-family="Arial" font-size="14.00">Configurar AWS</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2456.2" font-family="Arial" font-size="14.00">Amplify Hosting</text>
+</g>
+<!-- S1&#45;&gt;S1_T1 -->
+<g id="edge7" class="edge">
+<title>S1-&gt;S1_T1</title>
+<path fill="none" stroke="black" d="M253.47,-2178.44C253.47,-2249.91 253.47,-2477.2 253.47,-2477.2 253.47,-2477.2 479.98,-2477.2 479.98,-2477.2"/>
+<polygon fill="black" stroke="black" points="479.98,-2480.7 489.98,-2477.2 479.98,-2473.7 479.98,-2480.7"/>
+</g>
+<!-- S1_T2 -->
+<g id="node9" class="node">
+<title>S1_T2</title>
+<path fill="lightblue" stroke="black" d="M602.76,-2426.4C602.76,-2426.4 498.31,-2426.4 498.31,-2426.4 492.31,-2426.4 486.31,-2420.4 486.31,-2414.4 486.31,-2414.4 486.31,-2380 486.31,-2380 486.31,-2374 492.31,-2368 498.31,-2368 498.31,-2368 602.76,-2368 602.76,-2368 608.76,-2368 614.76,-2374 614.76,-2380 614.76,-2380 614.76,-2414.4 614.76,-2414.4 614.76,-2420.4 608.76,-2426.4 602.76,-2426.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2409.8" font-family="Arial" font-size="14.00">1.2</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2393" font-family="Arial" font-size="14.00">API Gateway</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2376.2" font-family="Arial" font-size="14.00">+ Lambda dummy</text>
+</g>
+<!-- S1&#45;&gt;S1_T2 -->
+<g id="edge8" class="edge">
+<title>S1-&gt;S1_T2</title>
+<path fill="none" stroke="black" d="M290.47,-2178.5C290.47,-2237.24 290.47,-2397.2 290.47,-2397.2 290.47,-2397.2 474.4,-2397.2 474.4,-2397.2"/>
+<polygon fill="black" stroke="black" points="474.4,-2400.7 484.4,-2397.2 474.4,-2393.7 474.4,-2400.7"/>
+</g>
+<!-- S1_T3 -->
+<g id="node10" class="node">
+<title>S1_T3</title>
+<path fill="lightblue" stroke="black" d="M605.87,-2346.4C605.87,-2346.4 495.2,-2346.4 495.2,-2346.4 489.2,-2346.4 483.2,-2340.4 483.2,-2334.4 483.2,-2334.4 483.2,-2300 483.2,-2300 483.2,-2294 489.2,-2288 495.2,-2288 495.2,-2288 605.87,-2288 605.87,-2288 611.87,-2288 617.87,-2294 617.87,-2300 617.87,-2300 617.87,-2334.4 617.87,-2334.4 617.87,-2340.4 611.87,-2346.4 605.87,-2346.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2329.8" font-family="Arial" font-size="14.00">1.3</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2313" font-family="Arial" font-size="14.00">Instancia RDS</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2296.2" font-family="Arial" font-size="14.00">+ Secrets Manager</text>
+</g>
+<!-- S1&#45;&gt;S1_T3 -->
+<g id="edge9" class="edge">
+<title>S1-&gt;S1_T3</title>
+<path fill="none" stroke="black" d="M327.47,-2178.45C327.47,-2221.97 327.47,-2317.2 327.47,-2317.2 327.47,-2317.2 471.49,-2317.2 471.49,-2317.2"/>
+<polygon fill="black" stroke="black" points="471.49,-2320.7 481.49,-2317.2 471.49,-2313.7 471.49,-2320.7"/>
+</g>
+<!-- S1_T4 -->
+<g id="node11" class="node">
+<title>S1_T4</title>
+<path fill="lightblue" stroke="black" d="M595.94,-2266.4C595.94,-2266.4 505.13,-2266.4 505.13,-2266.4 499.13,-2266.4 493.13,-2260.4 493.13,-2254.4 493.13,-2254.4 493.13,-2220 493.13,-2220 493.13,-2214 499.13,-2208 505.13,-2208 505.13,-2208 595.94,-2208 595.94,-2208 601.94,-2208 607.94,-2214 607.94,-2220 607.94,-2220 607.94,-2254.4 607.94,-2254.4 607.94,-2260.4 601.94,-2266.4 595.94,-2266.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2249.8" font-family="Arial" font-size="14.00">1.4</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2233" font-family="Arial" font-size="14.00">Configurar User</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2216.2" font-family="Arial" font-size="14.00">Pool Cognito</text>
+</g>
+<!-- S1&#45;&gt;S1_T4 -->
+<g id="edge10" class="edge">
+<title>S1-&gt;S1_T4</title>
+<path fill="none" stroke="black" d="M364.47,-2178.22C364.47,-2201.92 364.47,-2237.2 364.47,-2237.2 364.47,-2237.2 481.17,-2237.2 481.17,-2237.2"/>
+<polygon fill="black" stroke="black" points="481.17,-2240.7 491.17,-2237.2 481.17,-2233.7 481.17,-2240.7"/>
+</g>
+<!-- S1_T5 -->
+<g id="node12" class="node">
+<title>S1_T5</title>
+<path fill="lightblue" stroke="black" d="M601.38,-2186.4C601.38,-2186.4 499.69,-2186.4 499.69,-2186.4 493.69,-2186.4 487.69,-2180.4 487.69,-2174.4 487.69,-2174.4 487.69,-2140 487.69,-2140 487.69,-2134 493.69,-2128 499.69,-2128 499.69,-2128 601.38,-2128 601.38,-2128 607.38,-2128 613.38,-2134 613.38,-2140 613.38,-2140 613.38,-2174.4 613.38,-2174.4 613.38,-2180.4 607.38,-2186.4 601.38,-2186.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2169.8" font-family="Arial" font-size="14.00">1.5</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2153" font-family="Arial" font-size="14.00">UI de login</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2136.2" font-family="Arial" font-size="14.00">en React (mocks)</text>
+</g>
+<!-- S1&#45;&gt;S1_T5 -->
+<g id="edge11" class="edge">
+<title>S1-&gt;S1_T5</title>
+<path fill="none" stroke="black" d="M401.59,-2157.2C401.59,-2157.2 475.71,-2157.2 475.71,-2157.2"/>
+<polygon fill="black" stroke="black" points="475.71,-2160.7 485.71,-2157.2 475.71,-2153.7 475.71,-2160.7"/>
+</g>
+<!-- S1_T6 -->
+<g id="node13" class="node">
+<title>S1_T6</title>
+<path fill="lightblue" stroke="black" d="M595.94,-2106.4C595.94,-2106.4 505.13,-2106.4 505.13,-2106.4 499.13,-2106.4 493.13,-2100.4 493.13,-2094.4 493.13,-2094.4 493.13,-2060 493.13,-2060 493.13,-2054 499.13,-2048 505.13,-2048 505.13,-2048 595.94,-2048 595.94,-2048 601.94,-2048 607.94,-2054 607.94,-2060 607.94,-2060 607.94,-2094.4 607.94,-2094.4 607.94,-2100.4 601.94,-2106.4 595.94,-2106.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2089.8" font-family="Arial" font-size="14.00">1.6</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2073" font-family="Arial" font-size="14.00">Configurar MFA</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2056.2" font-family="Arial" font-size="14.00">en Cognito</text>
+</g>
+<!-- S1&#45;&gt;S1_T6 -->
+<g id="edge12" class="edge">
+<title>S1-&gt;S1_T6</title>
+<path fill="none" stroke="black" d="M398.47,-2136.18C398.47,-2112.48 398.47,-2077.2 398.47,-2077.2 398.47,-2077.2 481.53,-2077.2 481.53,-2077.2"/>
+<polygon fill="black" stroke="black" points="481.53,-2080.7 491.53,-2077.2 481.53,-2073.7 481.53,-2080.7"/>
+</g>
+<!-- S1_T7 -->
+<g id="node14" class="node">
+<title>S1_T7</title>
+<path fill="lightblue" stroke="black" d="M596.72,-2026.4C596.72,-2026.4 504.35,-2026.4 504.35,-2026.4 498.35,-2026.4 492.35,-2020.4 492.35,-2014.4 492.35,-2014.4 492.35,-1980 492.35,-1980 492.35,-1974 498.35,-1968 504.35,-1968 504.35,-1968 596.72,-1968 596.72,-1968 602.72,-1968 608.72,-1974 608.72,-1980 608.72,-1980 608.72,-2014.4 608.72,-2014.4 608.72,-2020.4 602.72,-2026.4 596.72,-2026.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-2009.8" font-family="Arial" font-size="14.00">1.7</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1993" font-family="Arial" font-size="14.00">Definir roles</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1976.2" font-family="Arial" font-size="14.00">(Alumno/Admin)</text>
+</g>
+<!-- S1&#45;&gt;S1_T7 -->
+<g id="edge13" class="edge">
+<title>S1-&gt;S1_T7</title>
+<path fill="none" stroke="black" d="M395.47,-2135.95C395.47,-2092.43 395.47,-1997.2 395.47,-1997.2 395.47,-1997.2 480.4,-1997.2 480.4,-1997.2"/>
+<polygon fill="black" stroke="black" points="480.4,-2000.7 490.4,-1997.2 480.4,-1993.7 480.4,-2000.7"/>
+</g>
+<!-- S1_T8 -->
+<g id="node15" class="node">
+<title>S1_T8</title>
+<path fill="lightblue" stroke="black" d="M585.44,-1946.4C585.44,-1946.4 515.63,-1946.4 515.63,-1946.4 509.63,-1946.4 503.63,-1940.4 503.63,-1934.4 503.63,-1934.4 503.63,-1900 503.63,-1900 503.63,-1894 509.63,-1888 515.63,-1888 515.63,-1888 585.44,-1888 585.44,-1888 591.44,-1888 597.44,-1894 597.44,-1900 597.44,-1900 597.44,-1934.4 597.44,-1934.4 597.44,-1940.4 591.44,-1946.4 585.44,-1946.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1929.8" font-family="Arial" font-size="14.00">1.8</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1913" font-family="Arial" font-size="14.00">Validar roles</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1896.2" font-family="Arial" font-size="14.00">con JWT</text>
+</g>
+<!-- S1&#45;&gt;S1_T8 -->
+<g id="edge14" class="edge">
+<title>S1-&gt;S1_T8</title>
+<path fill="none" stroke="black" d="M392.47,-2135.9C392.47,-2077.16 392.47,-1917.2 392.47,-1917.2 392.47,-1917.2 492.02,-1917.2 492.02,-1917.2"/>
+<polygon fill="black" stroke="black" points="492.02,-1920.7 502.02,-1917.2 492.02,-1913.7 492.02,-1920.7"/>
+</g>
+<!-- S2_T1 -->
+<g id="node16" class="node">
+<title>S2_T1</title>
+<path fill="lightblue" stroke="black" d="M587.38,-1866.4C587.38,-1866.4 513.69,-1866.4 513.69,-1866.4 507.69,-1866.4 501.69,-1860.4 501.69,-1854.4 501.69,-1854.4 501.69,-1820 501.69,-1820 501.69,-1814 507.69,-1808 513.69,-1808 513.69,-1808 587.38,-1808 587.38,-1808 593.38,-1808 599.38,-1814 599.38,-1820 599.38,-1820 599.38,-1854.4 599.38,-1854.4 599.38,-1860.4 593.38,-1866.4 587.38,-1866.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1849.8" font-family="Arial" font-size="14.00">2.1</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1833" font-family="Arial" font-size="14.00">Tabla Exams</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1816.2" font-family="Arial" font-size="14.00">en RDS</text>
+</g>
+<!-- S2&#45;&gt;S2_T1 -->
+<g id="edge15" class="edge">
+<title>S2-&gt;S2_T1</title>
+<path fill="none" stroke="black" d="M308.47,-1658.23C308.47,-1709.57 308.47,-1837.2 308.47,-1837.2 308.47,-1837.2 489.74,-1837.2 489.74,-1837.2"/>
+<polygon fill="black" stroke="black" points="489.74,-1840.7 499.74,-1837.2 489.74,-1833.7 489.74,-1840.7"/>
+</g>
+<!-- S2_T2 -->
+<g id="node17" class="node">
+<title>S2_T2</title>
+<path fill="lightblue" stroke="black" d="M615.01,-1786.4C615.01,-1786.4 486.06,-1786.4 486.06,-1786.4 480.06,-1786.4 474.06,-1780.4 474.06,-1774.4 474.06,-1774.4 474.06,-1740 474.06,-1740 474.06,-1734 480.06,-1728 486.06,-1728 486.06,-1728 615.01,-1728 615.01,-1728 621.01,-1728 627.01,-1734 627.01,-1740 627.01,-1740 627.01,-1774.4 627.01,-1774.4 627.01,-1780.4 621.01,-1786.4 615.01,-1786.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1769.8" font-family="Arial" font-size="14.00">2.2</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1753" font-family="Arial" font-size="14.00">Lambda ExamService</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1736.2" font-family="Arial" font-size="14.00">(guardar respuestas)</text>
+</g>
+<!-- S2&#45;&gt;S2_T2 -->
+<g id="edge16" class="edge">
+<title>S2-&gt;S2_T2</title>
+<path fill="none" stroke="black" d="M375.78,-1654.67C423.59,-1654.67 479.47,-1654.67 479.47,-1654.67 479.47,-1654.67 479.47,-1716.03 479.47,-1716.03"/>
+<polygon fill="black" stroke="black" points="475.97,-1716.03 479.47,-1726.03 482.97,-1716.03 475.97,-1716.03"/>
+</g>
+<!-- S2_T3 -->
+<g id="node18" class="node">
+<title>S2_T3</title>
+<path fill="lightblue" stroke="black" d="M606.46,-1706.4C606.46,-1706.4 494.62,-1706.4 494.62,-1706.4 488.62,-1706.4 482.62,-1700.4 482.62,-1694.4 482.62,-1694.4 482.62,-1660 482.62,-1660 482.62,-1654 488.62,-1648 494.62,-1648 494.62,-1648 606.46,-1648 606.46,-1648 612.46,-1648 618.46,-1654 618.46,-1660 618.46,-1660 618.46,-1694.4 618.46,-1694.4 618.46,-1700.4 612.46,-1706.4 606.46,-1706.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1689.8" font-family="Arial" font-size="14.00">2.3</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1673" font-family="Arial" font-size="14.00">UI de cuestionarios</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1656.2" font-family="Arial" font-size="14.00">(con mocks)</text>
+</g>
+<!-- S2&#45;&gt;S2_T3 -->
+<g id="edge17" class="edge">
+<title>S2-&gt;S2_T3</title>
+<path fill="none" stroke="black" d="M375.84,-1651.33C375.84,-1651.33 470.63,-1651.33 470.63,-1651.33"/>
+<polygon fill="black" stroke="black" points="470.63,-1654.83 480.63,-1651.33 470.63,-1647.83 470.63,-1654.83"/>
+</g>
+<!-- S2_T4 -->
+<g id="node19" class="node">
+<title>S2_T4</title>
+<path fill="lightblue" stroke="black" d="M599.45,-1626.4C599.45,-1626.4 501.62,-1626.4 501.62,-1626.4 495.62,-1626.4 489.62,-1620.4 489.62,-1614.4 489.62,-1614.4 489.62,-1580 489.62,-1580 489.62,-1574 495.62,-1568 501.62,-1568 501.62,-1568 599.45,-1568 599.45,-1568 605.45,-1568 611.45,-1574 611.45,-1580 611.45,-1580 611.45,-1614.4 611.45,-1614.4 611.45,-1620.4 605.45,-1626.4 599.45,-1626.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1609.8" font-family="Arial" font-size="14.00">2.4</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1593" font-family="Arial" font-size="14.00">Lógica de score</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1576.2" font-family="Arial" font-size="14.00">(80%, 3 intentos)</text>
+</g>
+<!-- S2&#45;&gt;S2_T4 -->
+<g id="edge18" class="edge">
+<title>S2-&gt;S2_T4</title>
+<path fill="none" stroke="black" d="M375.84,-1623.07C375.84,-1623.07 477.68,-1623.07 477.68,-1623.07"/>
+<polygon fill="black" stroke="black" points="477.68,-1626.57 487.68,-1623.07 477.68,-1619.57 477.68,-1626.57"/>
+</g>
+<!-- S2_T5 -->
+<g id="node20" class="node">
+<title>S2_T5</title>
+<path fill="lightblue" stroke="black" d="M619.68,-1546.4C619.68,-1546.4 481.39,-1546.4 481.39,-1546.4 475.39,-1546.4 469.39,-1540.4 469.39,-1534.4 469.39,-1534.4 469.39,-1500 469.39,-1500 469.39,-1494 475.39,-1488 481.39,-1488 481.39,-1488 619.68,-1488 619.68,-1488 625.68,-1488 631.68,-1494 631.68,-1500 631.68,-1500 631.68,-1534.4 631.68,-1534.4 631.68,-1540.4 625.68,-1546.4 619.68,-1546.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1529.8" font-family="Arial" font-size="14.00">2.5</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1513" font-family="Arial" font-size="14.00">Integración UI-Backend</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1496.2" font-family="Arial" font-size="14.00">(mostrar score)</text>
+</g>
+<!-- S2&#45;&gt;S2_T5 -->
+<g id="edge19" class="edge">
+<title>S2-&gt;S2_T5</title>
+<path fill="none" stroke="black" d="M376.05,-1619.73C422.69,-1619.73 476.47,-1619.73 476.47,-1619.73 476.47,-1619.73 476.47,-1558.37 476.47,-1558.37"/>
+<polygon fill="black" stroke="black" points="479.97,-1558.37 476.47,-1548.37 472.97,-1558.37 479.97,-1558.37"/>
+</g>
+<!-- S3_T1 -->
+<g id="node21" class="node">
+<title>S3_T1</title>
+<path fill="lightblue" stroke="black" d="M610.74,-1466.4C610.74,-1466.4 490.34,-1466.4 490.34,-1466.4 484.34,-1466.4 478.34,-1460.4 478.34,-1454.4 478.34,-1454.4 478.34,-1420 478.34,-1420 478.34,-1414 484.34,-1408 490.34,-1408 490.34,-1408 610.74,-1408 610.74,-1408 616.74,-1408 622.74,-1414 622.74,-1420 622.74,-1420 622.74,-1454.4 622.74,-1454.4 622.74,-1460.4 616.74,-1466.4 610.74,-1466.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1449.8" font-family="Arial" font-size="14.00">3.1</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1433" font-family="Arial" font-size="14.00">Lambda Certificados</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1416.2" font-family="Arial" font-size="14.00">(PDF en S3)</text>
+</g>
+<!-- S3&#45;&gt;S3_T1 -->
+<g id="edge20" class="edge">
+<title>S3-&gt;S3_T1</title>
+<path fill="none" stroke="black" d="M380.47,-1258.23C380.47,-1309.57 380.47,-1437.2 380.47,-1437.2 380.47,-1437.2 466.4,-1437.2 466.4,-1437.2"/>
+<polygon fill="black" stroke="black" points="466.4,-1440.7 476.4,-1437.2 466.4,-1433.7 466.4,-1440.7"/>
+</g>
+<!-- S3_T2 -->
+<g id="node22" class="node">
+<title>S3_T2</title>
+<path fill="lightblue" stroke="black" d="M584.28,-1386.4C584.28,-1386.4 516.79,-1386.4 516.79,-1386.4 510.79,-1386.4 504.79,-1380.4 504.79,-1374.4 504.79,-1374.4 504.79,-1340 504.79,-1340 504.79,-1334 510.79,-1328 516.79,-1328 516.79,-1328 584.28,-1328 584.28,-1328 590.28,-1328 596.28,-1334 596.28,-1340 596.28,-1340 596.28,-1374.4 596.28,-1374.4 596.28,-1380.4 590.28,-1386.4 584.28,-1386.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1369.8" font-family="Arial" font-size="14.00">3.2</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1353" font-family="Arial" font-size="14.00">UI descarga</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1336.2" font-family="Arial" font-size="14.00">certificado</text>
+</g>
+<!-- S3&#45;&gt;S3_T2 -->
+<g id="edge21" class="edge">
+<title>S3-&gt;S3_T2</title>
+<path fill="none" stroke="black" d="M384.47,-1258.38C384.47,-1292.83 384.47,-1357.2 384.47,-1357.2 384.47,-1357.2 493.2,-1357.2 493.2,-1357.2"/>
+<polygon fill="black" stroke="black" points="493.2,-1360.7 503.2,-1357.2 493.2,-1353.7 493.2,-1360.7"/>
+</g>
+<!-- S3_T3 -->
+<g id="node23" class="node">
+<title>S3_T3</title>
+<path fill="lightblue" stroke="black" d="M602.96,-1306.4C602.96,-1306.4 498.12,-1306.4 498.12,-1306.4 492.12,-1306.4 486.12,-1300.4 486.12,-1294.4 486.12,-1294.4 486.12,-1260 486.12,-1260 486.12,-1254 492.12,-1248 498.12,-1248 498.12,-1248 602.96,-1248 602.96,-1248 608.96,-1248 614.96,-1254 614.96,-1260 614.96,-1260 614.96,-1294.4 614.96,-1294.4 614.96,-1300.4 608.96,-1306.4 602.96,-1306.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1289.8" font-family="Arial" font-size="14.00">3.3</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1273" font-family="Arial" font-size="14.00">Barra de progreso</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1256.2" font-family="Arial" font-size="14.00">en frontend</text>
+</g>
+<!-- S3&#45;&gt;S3_T3 -->
+<g id="edge22" class="edge">
+<title>S3-&gt;S3_T3</title>
+<path fill="none" stroke="black" d="M389.99,-1253C389.99,-1253 474.11,-1253 474.11,-1253"/>
+<polygon fill="black" stroke="black" points="474.11,-1256.5 484.11,-1253 474.11,-1249.5 474.11,-1256.5"/>
+</g>
+<!-- S3_T4 -->
+<g id="node24" class="node">
+<title>S3_T4</title>
+<path fill="lightblue" stroke="black" d="M607.24,-1226.4C607.24,-1226.4 493.83,-1226.4 493.83,-1226.4 487.83,-1226.4 481.83,-1220.4 481.83,-1214.4 481.83,-1214.4 481.83,-1180 481.83,-1180 481.83,-1174 487.83,-1168 493.83,-1168 493.83,-1168 607.24,-1168 607.24,-1168 613.24,-1168 619.24,-1174 619.24,-1180 619.24,-1180 619.24,-1214.4 619.24,-1214.4 619.24,-1220.4 613.24,-1226.4 607.24,-1226.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1209.8" font-family="Arial" font-size="14.00">3.4</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1193" font-family="Arial" font-size="14.00">Backend de cálculo</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1176.2" font-family="Arial" font-size="14.00">de progreso</text>
+</g>
+<!-- S3&#45;&gt;S3_T4 -->
+<g id="edge23" class="edge">
+<title>S3-&gt;S3_T4</title>
+<path fill="none" stroke="black" d="M389.99,-1223.07C389.99,-1223.07 470.19,-1223.07 470.19,-1223.07"/>
+<polygon fill="black" stroke="black" points="470.19,-1226.57 480.19,-1223.07 470.19,-1219.57 470.19,-1226.57"/>
+</g>
+<!-- S3_T5 -->
+<g id="node25" class="node">
+<title>S3_T5</title>
+<path fill="lightblue" stroke="black" d="M620.47,-1146.4C620.47,-1146.4 480.61,-1146.4 480.61,-1146.4 474.61,-1146.4 468.61,-1140.4 468.61,-1134.4 468.61,-1134.4 468.61,-1100 468.61,-1100 468.61,-1094 474.61,-1088 480.61,-1088 480.61,-1088 620.47,-1088 620.47,-1088 626.47,-1088 632.47,-1094 632.47,-1100 632.47,-1100 632.47,-1134.4 632.47,-1134.4 632.47,-1140.4 626.47,-1146.4 620.47,-1146.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1129.8" font-family="Arial" font-size="14.00">3.5</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1113" font-family="Arial" font-size="14.00">Comparación de</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1096.2" font-family="Arial" font-size="14.00">progreso entre alumnos</text>
+</g>
+<!-- S3&#45;&gt;S3_T5 -->
+<g id="edge24" class="edge">
+<title>S3-&gt;S3_T5</title>
+<path fill="none" stroke="black" d="M389.7,-1219.73C431.34,-1219.73 473.47,-1219.73 473.47,-1219.73 473.47,-1219.73 473.47,-1158.37 473.47,-1158.37"/>
+<polygon fill="black" stroke="black" points="476.97,-1158.37 473.47,-1148.37 469.97,-1158.37 476.97,-1158.37"/>
+</g>
+<!-- S4_T1 -->
+<g id="node26" class="node">
+<title>S4_T1</title>
+<path fill="lightblue" stroke="black" d="M617.35,-1066.4C617.35,-1066.4 483.72,-1066.4 483.72,-1066.4 477.72,-1066.4 471.72,-1060.4 471.72,-1054.4 471.72,-1054.4 471.72,-1020 471.72,-1020 471.72,-1014 477.72,-1008 483.72,-1008 483.72,-1008 617.35,-1008 617.35,-1008 623.35,-1008 629.35,-1014 629.35,-1020 629.35,-1020 629.35,-1054.4 629.35,-1054.4 629.35,-1060.4 623.35,-1066.4 617.35,-1066.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1049.8" font-family="Arial" font-size="14.00">4.1</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1033" font-family="Arial" font-size="14.00">Lambda Notificaciones</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-1016.2" font-family="Arial" font-size="14.00">(SES)</text>
+</g>
+<!-- S4&#45;&gt;S4_T1 -->
+<g id="edge25" class="edge">
+<title>S4-&gt;S4_T1</title>
+<path fill="none" stroke="black" d="M410.88,-934.67C450.47,-934.67 486.47,-934.67 486.47,-934.67 486.47,-934.67 486.47,-996.03 486.47,-996.03"/>
+<polygon fill="black" stroke="black" points="482.97,-996.03 486.47,-1006.03 489.97,-996.03 482.97,-996.03"/>
+</g>
+<!-- S4_T2 -->
+<g id="node27" class="node">
+<title>S4_T2</title>
+<path fill="lightblue" stroke="black" d="M594,-986.4C594,-986.4 507.07,-986.4 507.07,-986.4 501.07,-986.4 495.07,-980.4 495.07,-974.4 495.07,-974.4 495.07,-940 495.07,-940 495.07,-934 501.07,-928 507.07,-928 507.07,-928 594,-928 594,-928 600,-928 606,-934 606,-940 606,-940 606,-974.4 606,-974.4 606,-980.4 600,-986.4 594,-986.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-969.8" font-family="Arial" font-size="14.00">4.2</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-953" font-family="Arial" font-size="14.00">UI preferencias</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-936.2" font-family="Arial" font-size="14.00">de notificación</text>
+</g>
+<!-- S4&#45;&gt;S4_T2 -->
+<g id="edge26" class="edge">
+<title>S4-&gt;S4_T2</title>
+<path fill="none" stroke="black" d="M410.99,-931.33C410.99,-931.33 483.29,-931.33 483.29,-931.33"/>
+<polygon fill="black" stroke="black" points="483.29,-934.83 493.29,-931.33 483.29,-927.83 483.29,-934.83"/>
+</g>
+<!-- S4_T3 -->
+<g id="node28" class="node">
+<title>S4_T3</title>
+<path fill="lightblue" stroke="black" d="M610.73,-906.4C610.73,-906.4 490.34,-906.4 490.34,-906.4 484.34,-906.4 478.34,-900.4 478.34,-894.4 478.34,-894.4 478.34,-860 478.34,-860 478.34,-854 484.34,-848 490.34,-848 490.34,-848 610.73,-848 610.73,-848 616.73,-848 622.73,-854 622.73,-860 622.73,-860 622.73,-894.4 622.73,-894.4 622.73,-900.4 616.73,-906.4 610.73,-906.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-889.8" font-family="Arial" font-size="14.00">4.3</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-873" font-family="Arial" font-size="14.00">Foro de comentarios</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-856.2" font-family="Arial" font-size="14.00">(backend)</text>
+</g>
+<!-- S4&#45;&gt;S4_T3 -->
+<g id="edge27" class="edge">
+<title>S4-&gt;S4_T3</title>
+<path fill="none" stroke="black" d="M410.99,-901.4C410.99,-901.4 466.54,-901.4 466.54,-901.4"/>
+<polygon fill="black" stroke="black" points="466.54,-904.9 476.54,-901.4 466.54,-897.9 466.54,-904.9"/>
+</g>
+<!-- S4_T4 -->
+<g id="node29" class="node">
+<title>S4_T4</title>
+<path fill="lightblue" stroke="black" d="M610.73,-826.4C610.73,-826.4 490.34,-826.4 490.34,-826.4 484.34,-826.4 478.34,-820.4 478.34,-814.4 478.34,-814.4 478.34,-780 478.34,-780 478.34,-774 484.34,-768 490.34,-768 490.34,-768 610.73,-768 610.73,-768 616.73,-768 622.73,-774 622.73,-780 622.73,-780 622.73,-814.4 622.73,-814.4 622.73,-820.4 616.73,-826.4 610.73,-826.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-809.8" font-family="Arial" font-size="14.00">4.4</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-793" font-family="Arial" font-size="14.00">Foro de comentarios</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-776.2" font-family="Arial" font-size="14.00">(UI)</text>
+</g>
+<!-- S4&#45;&gt;S4_T4 -->
+<g id="edge28" class="edge">
+<title>S4-&gt;S4_T4</title>
+<path fill="none" stroke="black" d="M399.47,-896.02C399.47,-861.57 399.47,-797.2 399.47,-797.2 399.47,-797.2 466.59,-797.2 466.59,-797.2"/>
+<polygon fill="black" stroke="black" points="466.59,-800.7 476.59,-797.2 466.59,-793.7 466.59,-800.7"/>
+</g>
+<!-- S4_T5 -->
+<g id="node30" class="node">
+<title>S4_T5</title>
+<path fill="lightblue" stroke="black" d="M618.52,-746C618.52,-746 482.56,-746 482.56,-746 476.56,-746 470.56,-740 470.56,-734 470.56,-734 470.56,-716.4 470.56,-716.4 470.56,-710.4 476.56,-704.4 482.56,-704.4 482.56,-704.4 618.52,-704.4 618.52,-704.4 624.52,-704.4 630.52,-710.4 630.52,-716.4 630.52,-716.4 630.52,-734 630.52,-734 630.52,-740 624.52,-746 618.52,-746"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-729.4" font-family="Arial" font-size="14.00">4.5</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-712.6" font-family="Arial" font-size="14.00">Modo concentración UI</text>
+</g>
+<!-- S4&#45;&gt;S4_T5 -->
+<g id="edge29" class="edge">
+<title>S4-&gt;S4_T5</title>
+<path fill="none" stroke="black" d="M389.47,-895.92C389.47,-845.93 389.47,-725.2 389.47,-725.2 389.47,-725.2 458.96,-725.2 458.96,-725.2"/>
+<polygon fill="black" stroke="black" points="458.96,-728.7 468.96,-725.2 458.96,-721.7 458.96,-728.7"/>
+</g>
+<!-- S5_T1 -->
+<g id="node31" class="node">
+<title>S5_T1</title>
+<path fill="lightblue" stroke="black" d="M597.88,-682.4C597.88,-682.4 503.19,-682.4 503.19,-682.4 497.19,-682.4 491.19,-676.4 491.19,-670.4 491.19,-670.4 491.19,-636 491.19,-636 491.19,-630 497.19,-624 503.19,-624 503.19,-624 597.88,-624 597.88,-624 603.88,-624 609.88,-630 609.88,-636 609.88,-636 609.88,-670.4 609.88,-670.4 609.88,-676.4 603.88,-682.4 597.88,-682.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-665.8" font-family="Arial" font-size="14.00">5.1</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-649" font-family="Arial" font-size="14.00">CI/CD pipeline</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-632.2" font-family="Arial" font-size="14.00">(GitHub Actions)</text>
+</g>
+<!-- S5&#45;&gt;S5_T1 -->
+<g id="edge30" class="edge">
+<title>S5-&gt;S5_T1</title>
+<path fill="none" stroke="black" d="M308.47,-554.38C308.47,-588.83 308.47,-653.2 308.47,-653.2 308.47,-653.2 479.19,-653.2 479.19,-653.2"/>
+<polygon fill="black" stroke="black" points="479.19,-656.7 489.19,-653.2 479.19,-649.7 479.19,-656.7"/>
+</g>
+<!-- S5_T2 -->
+<g id="node32" class="node">
+<title>S5_T2</title>
+<path fill="lightblue" stroke="black" d="M601.02,-602.4C601.02,-602.4 500.05,-602.4 500.05,-602.4 494.05,-602.4 488.05,-596.4 488.05,-590.4 488.05,-590.4 488.05,-556 488.05,-556 488.05,-550 494.05,-544 500.05,-544 500.05,-544 601.02,-544 601.02,-544 607.02,-544 613.02,-550 613.02,-556 613.02,-556 613.02,-590.4 613.02,-590.4 613.02,-596.4 607.02,-602.4 601.02,-602.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-585.8" font-family="Arial" font-size="14.00">5.2</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-569" font-family="Arial" font-size="14.00">Pruebas backend</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-552.2" font-family="Arial" font-size="14.00">integradas</text>
+</g>
+<!-- S5&#45;&gt;S5_T2 -->
+<g id="edge31" class="edge">
+<title>S5-&gt;S5_T2</title>
+<path fill="none" stroke="black" d="M373.61,-549C373.61,-549 476.16,-549 476.16,-549"/>
+<polygon fill="black" stroke="black" points="476.16,-552.5 486.16,-549 476.16,-545.5 476.16,-552.5"/>
+</g>
+<!-- S5_T3 -->
+<g id="node33" class="node">
+<title>S5_T3</title>
+<path fill="lightblue" stroke="black" d="M600.24,-522.4C600.24,-522.4 500.83,-522.4 500.83,-522.4 494.83,-522.4 488.83,-516.4 488.83,-510.4 488.83,-510.4 488.83,-476 488.83,-476 488.83,-470 494.83,-464 500.83,-464 500.83,-464 600.24,-464 600.24,-464 606.24,-464 612.24,-470 612.24,-476 612.24,-476 612.24,-510.4 612.24,-510.4 612.24,-516.4 606.24,-522.4 600.24,-522.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-505.8" font-family="Arial" font-size="14.00">5.3</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-489" font-family="Arial" font-size="14.00">Pruebas frontend</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-472.2" font-family="Arial" font-size="14.00">end-to-end</text>
+</g>
+<!-- S5&#45;&gt;S5_T3 -->
+<g id="edge32" class="edge">
+<title>S5-&gt;S5_T3</title>
+<path fill="none" stroke="black" d="M373.61,-517.4C373.61,-517.4 476.99,-517.4 476.99,-517.4"/>
+<polygon fill="black" stroke="black" points="476.99,-520.9 486.99,-517.4 476.99,-513.9 476.99,-520.9"/>
+</g>
+<!-- S5_T4 -->
+<g id="node34" class="node">
+<title>S5_T4</title>
+<path fill="lightblue" stroke="black" d="M603.74,-442.4C603.74,-442.4 497.33,-442.4 497.33,-442.4 491.33,-442.4 485.33,-436.4 485.33,-430.4 485.33,-430.4 485.33,-396 485.33,-396 485.33,-390 491.33,-384 497.33,-384 497.33,-384 603.74,-384 603.74,-384 609.74,-384 615.74,-390 615.74,-396 615.74,-396 615.74,-430.4 615.74,-430.4 615.74,-436.4 609.74,-442.4 603.74,-442.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-425.8" font-family="Arial" font-size="14.00">5.4</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-409" font-family="Arial" font-size="14.00">Deploy en Staging</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-392.2" font-family="Arial" font-size="14.00">(Amplify)</text>
+</g>
+<!-- S5&#45;&gt;S5_T4 -->
+<g id="edge33" class="edge">
+<title>S5-&gt;S5_T4</title>
+<path fill="none" stroke="black" d="M308.47,-512.02C308.47,-477.57 308.47,-413.2 308.47,-413.2 308.47,-413.2 473.52,-413.2 473.52,-413.2"/>
+<polygon fill="black" stroke="black" points="473.52,-416.7 483.52,-413.2 473.52,-409.7 473.52,-416.7"/>
+</g>
+<!-- S5_T5 -->
+<g id="node35" class="node">
+<title>S5_T5</title>
+<path fill="lightblue" stroke="black" d="M594.78,-362.4C594.78,-362.4 506.29,-362.4 506.29,-362.4 500.29,-362.4 494.29,-356.4 494.29,-350.4 494.29,-350.4 494.29,-316 494.29,-316 494.29,-310 500.29,-304 506.29,-304 506.29,-304 594.78,-304 594.78,-304 600.78,-304 606.78,-310 606.78,-316 606.78,-316 606.78,-350.4 606.78,-350.4 606.78,-356.4 600.78,-362.4 594.78,-362.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-345.8" font-family="Arial" font-size="14.00">5.5</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-329" font-family="Arial" font-size="14.00">Demo Beta con</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-312.2" font-family="Arial" font-size="14.00">stakeholders</text>
+</g>
+<!-- S5&#45;&gt;S5_T5 -->
+<g id="edge34" class="edge">
+<title>S5-&gt;S5_T5</title>
+<path fill="none" stroke="black" d="M276.47,-512.17C276.47,-460.83 276.47,-333.2 276.47,-333.2 276.47,-333.2 482.57,-333.2 482.57,-333.2"/>
+<polygon fill="black" stroke="black" points="482.57,-336.7 492.57,-333.2 482.57,-329.7 482.57,-336.7"/>
+</g>
+<!-- S6_T1 -->
+<g id="node36" class="node">
+<title>S6_T1</title>
+<path fill="lightblue" stroke="black" d="M611.13,-282C611.13,-282 489.95,-282 489.95,-282 483.95,-282 477.95,-276 477.95,-270 477.95,-270 477.95,-252.4 477.95,-252.4 477.95,-246.4 483.95,-240.4 489.95,-240.4 489.95,-240.4 611.13,-240.4 611.13,-240.4 617.13,-240.4 623.13,-246.4 623.13,-252.4 623.13,-252.4 623.13,-270 623.13,-270 623.13,-276 617.13,-282 611.13,-282"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-265.4" font-family="Arial" font-size="14.00">6.1</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-248.6" font-family="Arial" font-size="14.00">Deploy a Producción</text>
+</g>
+<!-- S6&#45;&gt;S6_T1 -->
+<g id="edge35" class="edge">
+<title>S6-&gt;S6_T1</title>
+<path fill="none" stroke="black" d="M341.47,-210.41C341.47,-231.65 341.47,-261.2 341.47,-261.2 341.47,-261.2 466.19,-261.2 466.19,-261.2"/>
+<polygon fill="black" stroke="black" points="466.19,-264.7 476.19,-261.2 466.19,-257.7 466.19,-264.7"/>
+</g>
+<!-- S6_T2 -->
+<g id="node37" class="node">
+<title>S6_T2</title>
+<path fill="lightblue" stroke="black" d="M613.05,-218.4C613.05,-218.4 488.02,-218.4 488.02,-218.4 482.02,-218.4 476.02,-212.4 476.02,-206.4 476.02,-206.4 476.02,-172 476.02,-172 476.02,-166 482.02,-160 488.02,-160 488.02,-160 613.05,-160 613.05,-160 619.05,-160 625.05,-166 625.05,-172 625.05,-172 625.05,-206.4 625.05,-206.4 625.05,-212.4 619.05,-218.4 613.05,-218.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-201.8" font-family="Arial" font-size="14.00">6.2</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-185" font-family="Arial" font-size="14.00">CloudWatch métricas</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-168.2" font-family="Arial" font-size="14.00">+ alarmas</text>
+</g>
+<!-- S6&#45;&gt;S6_T2 -->
+<g id="edge36" class="edge">
+<title>S6-&gt;S6_T2</title>
+<path fill="none" stroke="black" d="M378.75,-189.2C378.75,-189.2 464.21,-189.2 464.21,-189.2"/>
+<polygon fill="black" stroke="black" points="464.21,-192.7 474.21,-189.2 464.21,-185.7 464.21,-192.7"/>
+</g>
+<!-- S6_T3 -->
+<g id="node38" class="node">
+<title>S6_T3</title>
+<path fill="lightblue" stroke="black" d="M587,-138.4C587,-138.4 514.07,-138.4 514.07,-138.4 508.07,-138.4 502.07,-132.4 502.07,-126.4 502.07,-126.4 502.07,-92 502.07,-92 502.07,-86 508.07,-80 514.07,-80 514.07,-80 587,-80 587,-80 593,-80 599,-86 599,-92 599,-92 599,-126.4 599,-126.4 599,-132.4 593,-138.4 587,-138.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-121.8" font-family="Arial" font-size="14.00">6.3</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-105" font-family="Arial" font-size="14.00">Capacitación</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-88.2" font-family="Arial" font-size="14.00">a usuarios</text>
+</g>
+<!-- S6&#45;&gt;S6_T3 -->
+<g id="edge37" class="edge">
+<title>S6-&gt;S6_T3</title>
+<path fill="none" stroke="black" d="M332.47,-168.18C332.47,-144.48 332.47,-109.2 332.47,-109.2 332.47,-109.2 490.08,-109.2 490.08,-109.2"/>
+<polygon fill="black" stroke="black" points="490.08,-112.7 500.08,-109.2 490.08,-105.7 490.08,-112.7"/>
+</g>
+<!-- S6_T4 -->
+<g id="node39" class="node">
+<title>S6_T4</title>
+<path fill="lightblue" stroke="black" d="M605.29,-58.4C605.29,-58.4 495.78,-58.4 495.78,-58.4 489.78,-58.4 483.78,-52.4 483.78,-46.4 483.78,-46.4 483.78,-12 483.78,-12 483.78,-6 489.78,0 495.78,0 495.78,0 605.29,0 605.29,0 611.29,0 617.29,-6 617.29,-12 617.29,-12 617.29,-46.4 617.29,-46.4 617.29,-52.4 611.29,-58.4 605.29,-58.4"/>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-41.8" font-family="Arial" font-size="14.00">6.4</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-25" font-family="Arial" font-size="14.00">Hotfixes /</text>
+<text xml:space="preserve" text-anchor="middle" x="550.54" y="-8.2" font-family="Arial" font-size="14.00">iteraciones rápidas</text>
+</g>
+<!-- S6&#45;&gt;S6_T4 -->
+<g id="edge38" class="edge">
+<title>S6-&gt;S6_T4</title>
+<path fill="none" stroke="black" d="M285.47,-167.95C285.47,-124.43 285.47,-29.2 285.47,-29.2 285.47,-29.2 471.79,-29.2 471.79,-29.2"/>
+<polygon fill="black" stroke="black" points="471.79,-32.7 481.79,-29.2 471.79,-25.7 471.79,-32.7"/>
+</g>
+</g>
+</svg>

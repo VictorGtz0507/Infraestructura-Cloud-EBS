@@ -69,7 +69,7 @@ La solución se basa íntegramente en servicios de AWS, siguiendo un enfoque de 
 
 ### Diagrama de la Arquitectura
 *(Basado en la descripción del documento)*
-![Diagrama Arquitectura](Diagrama.png)
+![Diagrama Arquitectura](docs/Diagrama.png)
 
 ## Flujos de Interacción
 

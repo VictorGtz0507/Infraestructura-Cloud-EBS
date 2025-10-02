@@ -1,0 +1,73 @@
+digraph EDT_Proyecto_Sprints {
+    // --- Configuración para un diseño vertical organizado de Izquierda a Derecha ---
+    graph [rankdir="LR", splines=ortho, nodesep=0.3, ranksep=0.8];
+    node [shape=box, style="rounded,filled", fillcolor="lightblue", fontname="Arial"];
+
+    // --- Nivel 1: Proyecto Principal ---
+    Proyecto [label="Proyecto General\nPlataforma Educativa"];
+
+    // --- Nivel 2: Los Sprints como entregables principales ---
+    S1 [label="Sprint 1\nInfraestructura y Seguridad"];
+    S2 [label="Sprint 2\nEvaluaciones Core"];
+    S3 [label="Sprint 3\nCertificados y Progreso"];
+    S4 [label="Sprint 4\nNotificaciones & Interactividad"];
+    S5 [label="Sprint 5\nIntegración y Beta"];
+    S6 [label="Sprint 6\nProducción y Cierre"];
+    
+    // Conexión del Proyecto a los Sprints
+    Proyecto -> {S1, S2, S3, S4, S5, S6};
+
+    // ======================================================
+    // --- Nivel 3: Tareas dentro de cada Sprint ---
+    // ======================================================
+
+    // --- Tareas del Sprint 1 ---
+    S1_T1 [label="1.1\nConfigurar AWS\nAmplify Hosting"];
+    S1_T2 [label="1.2\nAPI Gateway\n+ Lambda dummy"];
+    S1_T3 [label="1.3\nInstancia RDS\n+ Secrets Manager"];
+    S1_T4 [label="1.4\nConfigurar User\nPool Cognito"];
+    S1_T5 [label="1.5\nUI de login\nen React (mocks)"];
+    S1_T6 [label="1.6\nConfigurar MFA\nen Cognito"];
+    S1_T7 [label="1.7\nDefinir roles\n(Alumno/Admin)"];
+    S1_T8 [label="1.8\nValidar roles\ncon JWT"];
+    S1 -> {S1_T1, S1_T2, S1_T3, S1_T4, S1_T5, S1_T6, S1_T7, S1_T8};
+
+    // --- Tareas del Sprint 2 ---
+    S2_T1 [label="2.1\nTabla Exams\nen RDS"];
+    S2_T2 [label="2.2\nLambda ExamService\n(guardar respuestas)"];
+    S2_T3 [label="2.3\nUI de cuestionarios\n(con mocks)"];
+    S2_T4 [label="2.4\nLógica de score\n(80%, 3 intentos)"];
+    S2_T5 [label="2.5\nIntegración UI-Backend\n(mostrar score)"];
+    S2 -> {S2_T1, S2_T2, S2_T3, S2_T4, S2_T5};
+    
+    // --- Tareas del Sprint 3 ---
+    S3_T1 [label="3.1\nLambda Certificados\n(PDF en S3)"];
+    S3_T2 [label="3.2\nUI descarga\ncertificado"];
+    S3_T3 [label="3.3\nBarra de progreso\nen frontend"];
+    S3_T4 [label="3.4\nBackend de cálculo\nde progreso"];
+    S3_T5 [label="3.5\nComparación de\nprogreso entre alumnos"];
+    S3 -> {S3_T1, S3_T2, S3_T3, S3_T4, S3_T5};
+
+    // --- Tareas del Sprint 4 ---
+    S4_T1 [label="4.1\nLambda Notificaciones\n(SES)"];
+    S4_T2 [label="4.2\nUI preferencias\nde notificación"];
+    S4_T3 [label="4.3\nForo de comentarios\n(backend)"];
+    S4_T4 [label="4.4\nForo de comentarios\n(UI)"];
+    S4_T5 [label="4.5\nModo concentración UI"];
+    S4 -> {S4_T1, S4_T2, S4_T3, S4_T4, S4_T5};
+
+    // --- Tareas del Sprint 5 ---
+    S5_T1 [label="5.1\nCI/CD pipeline\n(GitHub Actions)"];
+    S5_T2 [label="5.2\nPruebas backend\nintegradas"];
+    S5_T3 [label="5.3\nPruebas frontend\nend-to-end"];
+    S5_T4 [label="5.4\nDeploy en Staging\n(Amplify)"];
+    S5_T5 [label="5.5\nDemo Beta con\nstakeholders"];
+    S5 -> {S5_T1, S5_T2, S5_T3, S5_T4, S5_T5};
+
+    // --- Tareas del Sprint 6 ---
+    S6_T1 [label="6.1\nDeploy a Producción"];
+    S6_T2 [label="6.2\nCloudWatch métricas\n+ alarmas"];
+    S6_T3 [label="6.3\nCapacitación\na usuarios"];
+    S6_T4 [label="6.4\nHotfixes /\niteraciones rápidas"];
+    S6 -> {S6_T1, S6_T2, S6_T3, S6_T4};
+}
