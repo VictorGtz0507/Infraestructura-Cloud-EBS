@@ -56,8 +56,8 @@ coverage/
 .parcel-cache/
 
 # Lock files (optional, but sometimes ignored if using different package managers)
-# package-lock.json
-# yarn.lock
+package-lock.json
+yarn.lock
 
 # Other
 *.tgz
