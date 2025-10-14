@@ -1,0 +1,112 @@
+service: ebs-online-platform
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    NODE_ENV: ${self:provider.stage}
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    noPrependStageInUrl: false
+
+functions:
+  health:
+    handler: backend/src/handlers/health.handler
+    events:
+      - http:
+          path: /health
+          method: get
+          cors: true
+      - http:
+          path: /health
+          method: post
+          cors: true
+
+  # Courses endpoints
+  get-courses:
+    handler: backend/src/handlers/courses.getCourses
+    events:
+      - http:
+          path: /courses
+          method: get
+          cors: true
+
+  create-course:
+    handler: backend/src/handlers/courses.createCourse
+    events:
+      - http:
+          path: /courses
+          method: post
+          cors: true
+
+  get-course-by-id:
+    handler: backend/src/handlers/courses.getCourseById
+    events:
+      - http:
+          path: /courses/{id}
+          method: get
+          cors: true
+
+  update-course:
+    handler: backend/src/handlers/courses.updateCourse
+    events:
+      - http:
+          path: /courses/{id}
+          method: put
+          cors: true
+
+  delete-course:
+    handler: backend/src/handlers/courses.deleteCourse
+    events:
+      - http:
+          path: /courses/{id}
+          method: delete
+          cors: true
+
+  # Users endpoints
+  get-users:
+    handler: backend/src/handlers/users.getUsers
+    events:
+      - http:
+          path: /users
+          method: get
+          cors: true
+
+  create-user:
+    handler: backend/src/handlers/users.createUser
+    events:
+      - http:
+          path: /users
+          method: post
+          cors: true
+
+  get-user-by-id:
+    handler: backend/src/handlers/users.getUserById
+    events:
+      - http:
+          path: /users/{id}
+          method: get
+          cors: true
+
+  update-user:
+    handler: backend/src/handlers/users.updateUser
+    events:
+      - http:
+          path: /users/{id}
+          method: put
+          cors: true
+
+  delete-user:
+    handler: backend/src/handlers/users.deleteUser
+    events:
+      - http:
+          path: /users/{id}
+          method: delete
+          cors: true

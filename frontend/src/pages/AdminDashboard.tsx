@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  Users, 
-  BookOpen, 
-  Award, 
-  TrendingUp, 
-  Plus, 
-  Search, 
-  Edit, 
-  Trash2, 
+import {
+  Users,
+  BookOpen,
+  Award,
+  TrendingUp,
+  Plus,
+  Search,
+  Edit,
+  Trash2,
   Eye,
   Settings,
   BarChart3,
@@ -16,11 +16,15 @@ import {
   Database,
   Server
 } from 'lucide-react';
+import { CourseForm } from '../components/CourseForm';
+import { UserForm } from '../components/UserForm';
 
 export const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [userTab, setUserTab] = useState('students');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isCourseFormOpen, setIsCourseFormOpen] = useState(false);
+  const [isUserFormOpen, setIsUserFormOpen] = useState(false);
 
   // Mock data - En producción vendría de la API
   const stats = {
@@ -168,7 +172,10 @@ export const AdminDashboard: React.FC = () => {
             className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+        <button
+          onClick={() => setIsUserFormOpen(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+        >
           <Plus className="h-4 w-4 mr-2" />
           Agregar Usuario
         </button>
@@ -235,11 +242,90 @@ export const AdminDashboard: React.FC = () => {
     </div>
   );
 
+  const handleCreateCourse = async (courseData: any) => {
+    try {
+      // API call to create course using serverless-offline endpoint
+      const response = await fetch('http://localhost:4000/dev/courses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(courseData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error creating course');
+      }
+
+      const result = await response.json();
+      console.log('Course created successfully:', result);
+
+      // Check if the response has the expected structure
+      if (result.success && result.data) {
+        alert('Curso creado exitosamente');
+      } else {
+        throw new Error('Respuesta inesperada del servidor');
+      }
+
+    } catch (error) {
+      console.error('Error creating course:', error);
+      alert('Error al crear el curso. Por favor, inténtalo de nuevo.');
+    }
+  };
+
+  const handleCreateUser = async (userData: any) => {
+    try {
+      // API call to create user using serverless-offline endpoint
+      const response = await fetch('http://localhost:4000/dev/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        let errorMessage = 'Error creating user';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (parseError) {
+          // If response is not JSON, use status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
+      }
+
+      let result;
+      try {
+        result = await response.json();
+      } catch (parseError) {
+        throw new Error('Respuesta del servidor no es JSON válido');
+      }
+
+      console.log('User created successfully:', result);
+
+      // Check if the response has the expected structure
+      if (result.success && result.data) {
+        alert('Usuario creado exitosamente');
+      } else {
+        throw new Error('Respuesta inesperada del servidor');
+      }
+
+    } catch (error) {
+      console.error('Error creating user:', error);
+      alert(`Error al crear el usuario: ${error instanceof Error ? error.message : 'Error desconocido'}`);
+    }
+  };
+
   const renderCourseManagement = () => (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold text-gray-900">Gestión de Cursos</h3>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+        <button
+          onClick={() => setIsCourseFormOpen(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+        >
           <Plus className="h-4 w-4 mr-2" />
           Nuevo Curso
         </button>
@@ -444,6 +530,20 @@ export const AdminDashboard: React.FC = () => {
         {activeTab === 'courses' && renderCourseManagement()}
         {activeTab === 'reports' && renderReports()}
         {activeTab === 'settings' && renderSystemSettings()}
+
+        {/* Course Form Modal */}
+        <CourseForm
+          isOpen={isCourseFormOpen}
+          onClose={() => setIsCourseFormOpen(false)}
+          onSubmit={handleCreateCourse}
+        />
+
+        {/* User Form Modal */}
+        <UserForm
+          isOpen={isUserFormOpen}
+          onClose={() => setIsUserFormOpen(false)}
+          onSubmit={handleCreateUser}
+        />
       </div>
     </div>
   );
