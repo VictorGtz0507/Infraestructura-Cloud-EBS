@@ -18,7 +18,8 @@ npm run dev
 To deploy the backend Lambda functions, run the following from the root directory (where `serverless.yml` is located):
 
 ```bash
-serverless deploy
+npm install
+npm run dev
 ```
 
 ## Troubleshooting
