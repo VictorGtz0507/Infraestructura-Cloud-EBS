@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { Auth } from 'aws-amplify';
 
 interface User {
+  id?: string;
   name: string;
   role: 'student' | 'teacher' | 'admin';
   email: string;
@@ -32,65 +34,56 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Verificar si hay una sesión guardada al cargar la app
   useEffect(() => {
-    const savedUser = localStorage.getItem('ebsalem_user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        localStorage.removeItem('ebsalem_user');
-      }
-    }
-    setLoading(false);
+    checkAuthState();
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
-    // Credenciales del administrador
-    const adminCredentials = {
-      email: 'admin@ebsalem.com',
-      password: 'admin123'
-    };
-
-    // Credenciales del estudiante
-    const studentCredentials = {
-      email: 'ivan@ebsalem.com',
-      password: 'ivan123'
-    };
-
-    // Simular validación con delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    if (email === adminCredentials.email && password === adminCredentials.password) {
-      const userData: User = {
-        name: 'Administrador',
-        role: 'admin',
-        email: email
+  const checkAuthState = async () => {
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser();
+      const userInfo: User = {
+        id: currentUser.attributes.sub,
+        email: currentUser.attributes.email,
+        name: currentUser.attributes.name || currentUser.attributes.email,
+        role: mapCognitoGroups(currentUser.signInUserSession.accessToken.payload['cognito:groups'] || []) as 'student' | 'teacher' | 'admin'
       };
-
-      setUser(userData);
-      localStorage.setItem('ebsalem_user', JSON.stringify(userData));
-      return true;
+      setUser(userInfo);
+    } catch (error) {
+      console.log('No authenticated user');
     }
-
-    if (email === studentCredentials.email && password === studentCredentials.password) {
-      const userData: User = {
-        name: 'Ivan Alvarez',
-        role: 'student',
-        email: email
-      };
-
-      setUser(userData);
-      localStorage.setItem('ebsalem_user', JSON.stringify(userData));
-      return true;
-    }
-
-    return false;
+    setLoading(false);
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('ebsalem_user');
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
+      const user = await Auth.signIn(email, password);
+      const userInfo: User = {
+        id: user.attributes.sub,
+        email: user.attributes.email,
+        name: user.attributes.name || user.attributes.email,
+        role: mapCognitoGroups(user.signInUserSession?.accessToken.payload['cognito:groups'] || []) as 'student' | 'teacher' | 'admin'
+      };
+      setUser(userInfo);
+      return true;
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await Auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
+  const mapCognitoGroups = (groups: string[]) => {
+    if (groups.includes('admin')) return 'admin';
+    if (groups.includes('teacher')) return 'teacher';
+    return 'student';
   };
 
   const value: AuthContextType = {

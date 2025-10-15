@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Bell } from 'lucide-react';
+import { Bell, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const DashboardPage: React.FC = () => {
@@ -127,18 +127,27 @@ export const DashboardPage: React.FC = () => {
       <header className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Left: Hamburger Menu */}
-            <div className="flex items-center relative">
-              <input type="checkbox" id="menu-toggle" />
-              <label htmlFor="menu-toggle">
-                <div className="menu-middle-bar"></div>
-              </label>
-              <ul id="menu">
-                <li><Link to="/cursos">Mis Cursos</Link></li>
-                <li><Link to="/calendario">Calendario</Link></li>
-                <li><Link to="/tareas">Tareas</Link></li>
-                <li><Link to="/calificaciones">Calificaciones</Link></li>
-              </ul>
+            {/* Left: Back Button and Hamburger Menu */}
+            <div className="flex items-center space-x-4">
+              <Link
+                to="/"
+                className="flex items-center text-white hover:text-primary-200 transition-colors"
+              >
+                <ArrowLeft className="h-5 w-5 mr-2" />
+                <span className="text-sm font-medium">Regresar</span>
+              </Link>
+              <div className="flex items-center relative">
+                <input type="checkbox" id="menu-toggle" />
+                <label htmlFor="menu-toggle">
+                  <div className="menu-middle-bar"></div>
+                </label>
+                <ul id="menu">
+                  <li><Link to="/cursos">Mis Cursos</Link></li>
+                  <li><Link to="/calendario">Calendario</Link></li>
+                  <li><Link to="/tareas">Tareas</Link></li>
+                  <li><Link to="/calificaciones">Calificaciones</Link></li>
+                </ul>
+              </div>
             </div>
 
             {/* Center: Welcome Text */}

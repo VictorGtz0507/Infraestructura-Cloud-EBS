@@ -7,9 +7,21 @@ provider:
   stage: ${opt:stage, 'dev'}
   environment:
     NODE_ENV: ${self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - cognito-idp:*
+            - s3:*
+            - ses:*
+            - sns:*
+            - rds:*
+          Resource: "*"
 
 plugins:
   - serverless-offline
+  - serverless-iam-roles-per-function
 
 custom:
   serverless-offline:
@@ -18,95 +30,155 @@ custom:
 
 functions:
   health:
-    handler: backend/src/handlers/health.handler
+    handler: backend/handlers/health.handler
     events:
       - http:
           path: /health
           method: get
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
       - http:
           path: /health
           method: post
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   # Courses endpoints
   get-courses:
-    handler: backend/src/handlers/courses.getCourses
+    handler: backend/handlers/courses.getCourses
     events:
       - http:
           path: /courses
           method: get
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   create-course:
-    handler: backend/src/handlers/courses.createCourse
+    handler: backend/handlers/courses.createCourse
     events:
       - http:
           path: /courses
           method: post
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   get-course-by-id:
-    handler: backend/src/handlers/courses.getCourseById
+    handler: backend/handlers/courses.getCourseById
     events:
       - http:
           path: /courses/{id}
           method: get
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   update-course:
-    handler: backend/src/handlers/courses.updateCourse
+    handler: backend/handlers/courses.updateCourse
     events:
       - http:
           path: /courses/{id}
           method: put
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   delete-course:
-    handler: backend/src/handlers/courses.deleteCourse
+    handler: backend/handlers/courses.deleteCourse
     events:
       - http:
           path: /courses/{id}
           method: delete
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   # Users endpoints
   get-users:
-    handler: backend/src/handlers/users.getUsers
+    handler: backend/handlers/users.getUsers
     events:
       - http:
           path: /users
           method: get
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   create-user:
-    handler: backend/src/handlers/users.createUser
+    handler: backend/handlers/users.createUser
     events:
       - http:
           path: /users
           method: post
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   get-user-by-id:
-    handler: backend/src/handlers/users.getUserById
+    handler: backend/handlers/users.getUserById
     events:
       - http:
           path: /users/{id}
           method: get
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   update-user:
-    handler: backend/src/handlers/users.updateUser
+    handler: backend/handlers/users.updateUser
     events:
       - http:
           path: /users/{id}
           method: put
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true
 
   delete-user:
-    handler: backend/src/handlers/users.deleteUser
+    handler: backend/handlers/users.deleteUser
     events:
       - http:
           path: /users/{id}
           method: delete
-          cors: true
+          cors:
+            origin: 'http://localhost:5173'
+            headers:
+              - Content-Type
+              - Authorization
+            allowCredentials: true

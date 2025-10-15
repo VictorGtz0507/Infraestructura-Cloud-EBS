@@ -10,6 +10,10 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ContactPage } from './pages/ContactPage';
 import { AboutPage } from './pages/AboutPage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminCoursesPage } from './pages/AdminCoursesPage';
+import { AdminUsersPage } from './pages/AdminUsersPage';
+import { AdminReportsPage } from './pages/AdminReportsPage';
+import { AdminSettingsPage } from './pages/AdminSettingsPage';
 import { CoursesPage } from './pages/CoursesPage';
 import { CalendarPage } from './pages/CalendarPage';
 import { AssignmentsPage } from './pages/AssignmentsPage';
@@ -66,6 +70,38 @@ const AppRoutes: React.FC = () => {
           element={
             <ProtectedRoute requiredRole="admin">
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/cursos"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminCoursesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/usuarios"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminUsersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/reportes"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminReportsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/configuracion"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminSettingsPage />
             </ProtectedRoute>
           }
         />
