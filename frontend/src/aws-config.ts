@@ -1,34 +1,29 @@
-import { Amplify } from 'aws-amplify';
+// Configuración opcional de AWS Amplify
+// Solo se configura si tenemos credenciales reales de AWS
 
-Amplify.configure({
-  Auth: {
-    region: import.meta.env.VITE_AWS_REGION,
-    userPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
-    userPoolWebClientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
-    authenticationFlowType: 'USER_SRP_AUTH',
-    oauth: {
-      domain: 'your-domain.auth.us-east-1.amazoncognito.com',
-      scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-      redirectSignIn: 'http://localhost:5173/',
-      redirectSignOut: 'http://localhost:5173/',
-      responseType: 'code'
-    }
-  },
-  API: {
-    endpoints: [
-      {
-        name: "EBSAPI",
-        endpoint: import.meta.env.VITE_API_BASE_URL,
-        region: import.meta.env.VITE_AWS_REGION
+const USE_AWS_SERVICES = import.meta.env.VITE_COGNITO_USER_POOL_ID &&
+                        import.meta.env.VITE_COGNITO_USER_POOL_ID !== 'your-user-pool-id' &&
+                        import.meta.env.VITE_COGNITO_CLIENT_ID &&
+                        import.meta.env.VITE_COGNITO_CLIENT_ID !== 'your-client-id';
+
+if (USE_AWS_SERVICES) {
+  // Solo importar y configurar si tenemos credenciales reales
+  import('aws-amplify').then(({ Amplify }) => {
+    Amplify.configure({
+      Auth: {
+        Cognito: {
+          userPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
+          userPoolClientId: import.meta.env.VITE_COGNITO_CLIENT_ID
+        }
       }
-    ]
-  },
-  Storage: {
-    AWSS3: {
-      bucket: 'your-bucket-name',
-      region: import.meta.env.VITE_AWS_REGION
-    }
-  }
-});
+    });
 
-export default Amplify;
+    console.log('✅ AWS Amplify configurado con servicios reales');
+  }).catch(error => {
+    console.warn('⚠️ Error configurando AWS Amplify:', error);
+  });
+} else {
+  console.log('🔧 Modo desarrollo: Usando autenticación mock (sin AWS Cognito)');
+}
+
+export default {};
