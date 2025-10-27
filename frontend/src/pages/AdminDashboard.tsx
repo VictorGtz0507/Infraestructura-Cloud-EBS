@@ -10,20 +10,21 @@ import {
   Trash2,
   Eye,
   Settings,
-  BarChart3,
   Mail,
   MessageSquare,
-  Database,
   Server,
-  Calendar,
   CheckCircle
 } from 'lucide-react';
-import { StatCard } from '../components/StatCard';
-import { CourseForm } from '../components/CourseForm';
-import { UserForm } from '../components/UserForm';
+import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
+import { UserSidebar } from '../components/Layout/Sidebar';
+import { StatCard } from '../components/Dashboard/StatCard';
+import { CourseForm } from '../components/forms/CourseForm';
+import { UserForm } from '../components/forms/UserForm';
+import { useAuth } from '../contexts/AuthContext';
 
 export const AdminDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const { user } = useAuth();
+  const [activeTab] = useState('overview');
   const [userTab, setUserTab] = useState('students');
   const [searchTerm, setSearchTerm] = useState('');
   const [isCourseFormOpen, setIsCourseFormOpen] = useState(false);
@@ -370,6 +371,8 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
+
+
   const renderCourseManagement = () => (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -535,68 +538,64 @@ export const AdminDashboard: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <SidebarProvider>
+      <UserSidebar user={user || undefined} />
+      <SidebarInset>
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
-            {getGreeting()}, Administrador
-          </h1>
-          <p className="text-gray-600 mt-1">
-            Panel de control - Escuela Bíblica Salem
-          </p>
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="mb-8">
-          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-            {[
-              { id: 'overview', label: 'Vista General', icon: BarChart3, href: '/admin' },
-              { id: 'users', label: 'Gestión Usuarios', icon: Users, href: '/admin/usuarios' },
-              { id: 'courses', label: 'Gestión Cursos', icon: BookOpen, href: '/admin/cursos' },
-              { id: 'reports', label: 'Reportes', icon: TrendingUp, href: '/admin/reportes' },
-              { id: 'settings', label: 'Configuración', icon: Settings, href: '/admin/configuracion' }
-            ].map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <a
-                  key={tab.id}
-                  href={tab.href}
-                  className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    activeTab === tab.id
-                      ? 'bg-white text-blue-600 shadow-sm'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  <Icon className="h-4 w-4 mr-2" />
-                  {tab.label}
-                </a>
-              );
-            })}
+        <header className="bg-white border-b border-gray-200 px-8 py-4 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">
+                {getGreeting()}, Administrador
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Panel de control - Escuela Bíblica Salem
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
+                A
+              </div>
+              <div>
+                <p className="text-sm font-medium">Administrador</p>
+                <p className="text-xs text-muted-foreground">Admin</p>
+              </div>
+            </div>
           </div>
+        </header>
+
+        {/* Dashboard Content */}
+        <div className="p-8 animate-fade-in">
+          {/* Content */}
+          {renderOverview()}
+  
+          {/* User Management Tab */}
+          {activeTab === 'users' && renderUserManagement()}
+  
+          {/* Course Management Tab */}
+          {activeTab === 'courses' && renderCourseManagement()}
+  
+          {/* Reports Tab */}
+          {activeTab === 'reports' && renderReports()}
+  
+          {/* System Settings Tab */}
+          {activeTab === 'system' && renderSystemSettings()}
+  
+          {/* Course Form Modal */}
+          <CourseForm
+            isOpen={isCourseFormOpen}
+            onClose={() => setIsCourseFormOpen(false)}
+            onSubmit={handleCreateCourse}
+          />
+
+          {/* User Form Modal */}
+          <UserForm
+            isOpen={isUserFormOpen}
+            onClose={() => setIsUserFormOpen(false)}
+            onSubmit={handleCreateUser}
+          />
         </div>
-
-        {/* Content */}
-        {activeTab === 'overview' && renderOverview()}
-        {activeTab === 'users' && renderUserManagement()}
-        {activeTab === 'courses' && renderCourseManagement()}
-        {activeTab === 'reports' && renderReports()}
-        {activeTab === 'settings' && renderSystemSettings()}
-
-        {/* Course Form Modal */}
-        <CourseForm
-          isOpen={isCourseFormOpen}
-          onClose={() => setIsCourseFormOpen(false)}
-          onSubmit={handleCreateCourse}
-        />
-
-        {/* User Form Modal */}
-        <UserForm
-          isOpen={isUserFormOpen}
-          onClose={() => setIsUserFormOpen(false)}
-          onSubmit={handleCreateUser}
-        />
-      </div>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };

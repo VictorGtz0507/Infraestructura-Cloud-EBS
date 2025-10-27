@@ -17,10 +17,19 @@ Una plataforma web moderna y escalable para la gestión de cursos en modalidad o
 ### Frontend
 - **React 18.3.1** - Biblioteca para la interfaz de usuario
 - **TypeScript 5.5.3** - Tipado estático para un código más robusto
-- **Vite 5.4.2** - Herramienta de construcción y servidor de desarrollo
-- **React Router DOM 7.9.1** - Enrutamiento del lado del cliente
-- **Tailwind CSS 3.4.1** - Framework de CSS para diseño rápido y moderno
-- **Lucide React 0.344.0** - Biblioteca de iconos
+- **Vite 7.1.9** - Herramienta de construcción y servidor de desarrollo con React SWC plugin
+- **Tailwind CSS 3.4.1** - Framework de CSS para diseño rápido y moderno con extensiones de tema personalizadas
+- **Radix UI Primitives** - Componentes de UI accesibles y personalizables (accordion, dialog, dropdown, etc.)
+- **Lucide React 0.344.0** - Biblioteca moderna de íconos SVG optimizados para React
+- **React Hook Form 7.53.0** - Manejo de formularios con validación usando Zod
+- **Zod 3.23.8** - Esquemas de validación para TypeScript
+- **React Router DOM 6.30.1** - Enrutamiento del lado del cliente
+- **TanStack React Query 5.83.0** - Gestión de estado y fetching de datos
+- **Framer Motion 12.23.21** - Animaciones y transiciones avanzadas
+- **GSAP 3.13.0** - Animaciones de alto rendimiento
+- **Recharts 2.15.4** - Visualización de datos y gráficos
+- **Sonner 1.7.4** - Notificaciones toast elegantes
+- **date-fns 3.6.0** - Manipulación y formateo de fechas
 
 ### Backend (AWS Cloud Native)
 - **AWS Amplify**: Orquestación de servicios y pipeline de CI/CD
@@ -31,6 +40,55 @@ Una plataforma web moderna y escalable para la gestión de cursos en modalidad o
 - **AWS Lambda**: Funciones serverless para ejecutar la lógica de negocio
 - **Amazon RDS (Relational Database Service)**: Base de datos MySQL gestionada, escalable y segura
 - **AWS IAM (Identity and Access Management)**: Gestión de permisos y roles seguros
+
+## 🛠️ Stack Tecnológico Frontend Detallado
+
+### Framework y Herramientas de Construcción
+- **React 18.3.1**: Biblioteca principal para construir interfaces de usuario interactivas y reutilizables.
+- **TypeScript 5.5.3**: Proporciona tipado estático para mayor robustez y detección de errores en tiempo de desarrollo.
+- **Vite 7.1.9**: Herramienta de construcción rápida y eficiente con soporte para HMR (Hot Module Replacement). Utiliza el plugin React SWC para compilación optimizada.
+
+### Estilos y Diseño
+- **Tailwind CSS 3.4.1**: Framework de CSS utilitario para un diseño rápido, responsive y personalizable. Incluye extensiones de tema personalizadas para colores, fuentes y componentes.
+- **PostCSS y Autoprefixer**: Procesamiento de CSS para compatibilidad con navegadores.
+
+### Componentes de UI
+- **Radix UI Primitives**: Conjunto de componentes de UI headless, accesibles y personalizables. Incluye:
+  - Accordion: Para secciones colapsables.
+  - Dialog: Modales y diálogos.
+  - Dropdown Menu: Menús desplegables.
+  - Alert Dialog: Diálogos de confirmación.
+  - Popover: Elementos flotantes.
+  - Select: Selectores personalizados.
+  - Tabs: Pestañas para navegación.
+- Estos componentes se integran con Tailwind CSS para un diseño consistente.
+
+### Iconos
+- **Lucide React 0.344.0**: Biblioteca moderna de íconos SVG optimizados para React, con más de 1000 iconos personalizables.
+
+### Formularios y Validación
+- **React Hook Form 7.53.0**: Manejo eficiente de formularios con hooks, minimizando re-renders.
+- **Zod 3.23.8**: Esquemas de validación para TypeScript, integrados con React Hook Form para validación robusta y tipada.
+- **@hookform/resolvers**: Resolvers para conectar Zod con React Hook Form.
+
+### Enrutamiento
+- **React Router DOM 6.30.1**: Enrutamiento del lado del cliente con soporte para rutas anidadas, lazy loading y protección de rutas.
+
+### Gestión de Estado y Datos
+- **TanStack React Query 5.83.0**: Librería para fetching, caching y sincronización de datos del servidor. Proporciona herramientas para mutaciones, queries y manejo de errores.
+
+### Animaciones
+- **Framer Motion 12.23.21**: Librería para animaciones declarativas en React, incluyendo transiciones, gestos y animaciones de página.
+- **GSAP 3.13.0**: Motor de animaciones de alto rendimiento para efectos avanzados y complejos.
+
+### Visualización de Datos
+- **Recharts 2.15.4**: Librería para gráficos y visualizaciones de datos, compatible con React. Incluye gráficos de barras, líneas, pie, etc.
+
+### Notificaciones
+- **Sonner 1.7.4**: Sistema de notificaciones toast elegante y personalizable para feedback al usuario.
+
+### Manejo de Fechas
+- **date-fns 3.6.0**: Librería modular para manipulación, formateo y parsing de fechas, con soporte para múltiples locales.
 
 ## 🎨 Estándares de Diseño
 
@@ -230,6 +288,33 @@ Los roles se pueden gestionar a través de los Grupos de Usuarios de Cognito, pe
 - Sistema de notificaciones con Amazon SNS
 - Chat en tiempo real (posiblemente con AWS AppSync)
 - Reportes y analíticas con Amazon QuickSight
+
+## 🔧 Implementación del Stack Frontend
+
+### ✅ Implementado
+- Configuración base de React con TypeScript y Vite (con SWC plugin)
+- Tailwind CSS con tema personalizado
+- Lucide React para iconos
+- React Router DOM para enrutamiento
+- Framer Motion para animaciones básicas
+- AWS Amplify para integración con backend
+
+### 🔄 En Implementación
+- **Radix UI Primitives**: Componentes como Dialog y AlertDialog integrados, refactorizando Modal y Alert para mayor accesibilidad.
+- **React Hook Form + Zod**: Esquemas de validación creados, integración en formularios como UserForm en progreso.
+- **TanStack React Query**: Configuración inicial, refactorización de API calls pendiente.
+- **Recharts**: Preparado para reemplazar gráficos personalizados en AdminDashboard.
+- **Sonner**: Integración para notificaciones en lugar de alert() en progreso.
+- **date-fns**: Listo para manejo de fechas en componentes.
+- **GSAP**: Configuración para animaciones avanzadas.
+
+### 📋 Pendiente
+- Refactorización completa de componentes para usar Radix UI.
+- Integración total de React Hook Form en todos los formularios.
+- Migración de API calls a TanStack React Query.
+- Reemplazo de gráficos personalizados por Recharts.
+- Implementación de Sonner en todo el proyecto.
+- Uso de date-fns en funcionalidades de calendario y fechas.
 
 ## 🌐 Despliegue y CI/CD
 

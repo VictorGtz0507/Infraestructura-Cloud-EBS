@@ -1,173 +1,309 @@
-import React from 'react';
+import React, { useMemo } from 'react'; // MEJORA: Importar useMemo
 import { useAuth } from '../contexts/AuthContext';
-import { Bell } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
+import { UserSidebar } from '../components/Layout/Sidebar';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Calendar, Clock, AlertCircle, CheckCircle } from 'lucide-react';
 
+// --- MEJORA: Tipado de datos ---
+type AssignmentStatus = "pending" | "in_progress" | "completed";
+type AssignmentPriority = "high" | "medium" | "low";
+
+interface Assignment {
+  id: number;
+  title: string;
+  course: string;
+  dueDate: string;
+  status: AssignmentStatus;
+  priority: AssignmentPriority;
+  description: string;
+}
+
+// --- MEJORA: Datos pre-procesados ---
+interface ProcessedAssignment extends Assignment {
+  daysUntil: number;
+  formattedDate: string;
+}
+
+const assignments: Assignment[] = [
+  {
+    id: 1,
+    title: "Ensayo sobre Romanos 8",
+    course: "Estudio de Romanos",
+    dueDate: "2025-10-25",
+    status: "pending",
+    priority: "high",
+    description: "Análisis del capítulo 8 de Romanos enfocado en la vida en el Espíritu"
+  },
+  {
+    id: 2,
+    title: "Memorización de Salmos 23",
+    course: "Memorización Bíblica",
+    dueDate: "2025-10-27",
+    status: "in_progress",
+    priority: "medium",
+    description: "Memorizar completamente el Salmo 23 en versión Reina-Valera 1960"
+  },
+  {
+    id: 3,
+    title: "Análisis de Parábola del Sembrador",
+    course: "Estudio de Parábolas",
+    dueDate: "2025-10-30",
+    status: "completed",
+    priority: "medium",
+    description: "Análisis detallado de la parábola del sembrador y sus aplicaciones prácticas"
+  },
+  {
+    id: 4,
+    title: "Estudio del Tabernáculo",
+    course: "Historia Bíblica",
+    dueDate: "2025-11-02",
+    status: "pending",
+    priority: "low",
+    description: "Investigación sobre el significado espiritual del tabernáculo de Moisés"
+  }
+];
+
+// --- MEJORA: Helpers refactorizados ---
+
+const getStatusVariant = (status: AssignmentStatus): "default" | "destructive" | "secondary" | "outline" => {
+  switch (status) {
+    case 'completed':
+      return "default"; // Verde para completado
+    case 'in_progress':
+      return "secondary"; // Amarillo para en progreso
+    case 'pending':
+    default:
+      return "destructive"; // Rojo para pendiente
+  }
+};
+
+const getStatusText = (status: AssignmentStatus): string => {
+  switch (status) {
+    case 'completed':
+      return "Completada";
+    case 'in_progress':
+      return "En Progreso";
+    case 'pending':
+    default:
+      return "Pendiente";
+  }
+}
+
+const getPriorityVariant = (priority: AssignmentPriority): "default" | "destructive" | "secondary" | "outline" => {
+  switch (priority) {
+    case 'high':
+      return "destructive";
+    case 'medium':
+      return "outline";
+    case 'low':
+    default:
+      return "secondary";
+  }
+};
+
+const getPriorityText = (priority: AssignmentPriority): string => {
+  switch (priority) {
+    case 'high':
+      return "Alta";
+    case 'medium':
+      return "Media";
+    case 'low':
+    default:
+      return "Baja";
+  }
+}
+
+const getStatusIcon = (status: AssignmentStatus) => {
+  switch (status) {
+    case 'completed':
+      // Usa colores semánticos del tema
+      return <CheckCircle className="w-5 h-5 text-success" />;
+    case 'in_progress':
+      return <Clock className="w-5 h-5 text-warning" />;
+    case 'pending':
+    default:
+      return <AlertCircle className="w-5 h-5 text-destructive" />;
+  }
+};
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const utcDate = new Date(date.valueOf() + date.getTimezoneOffset() * 60000);
+  return utcDate.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+};
+
+// --- MEJORA: Componente de Tarjeta de Tarea (DRY) ---
+const AssignmentCard: React.FC<{ assignment: ProcessedAssignment }> = ({ assignment }) => {
+  
+  const daysText =
+    assignment.daysUntil < 0
+      ? "Vencida"
+      : assignment.daysUntil === 0
+      ? "Vence Hoy"
+      : assignment.daysUntil === 1
+      ? "Vence Mañana"
+      : `Vence en ${assignment.daysUntil} días`;
+
+  return (
+    <Card className="hover:shadow-lg transition-all duration-300 flex flex-col">
+      <CardHeader>
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-3">
+            {getStatusIcon(assignment.status)}
+            <div>
+              <CardTitle className="text-xl">{assignment.title}</CardTitle>
+              <CardDescription className="mt-1">{assignment.course}</CardDescription>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Badge variant={getPriorityVariant(assignment.priority)} className="justify-center">
+              {getPriorityText(assignment.priority)}
+            </Badge>
+            {assignment.status !== 'completed' && (
+              <Badge variant={getStatusVariant(assignment.status)} className="justify-center">
+                {getStatusText(assignment.status)}
+              </Badge>
+            )}
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-grow flex flex-col justify-between">
+        <p className="text-muted-foreground mb-4">{assignment.description}</p>
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1">
+            <Calendar className="w-4 h-4" />
+            <span>{assignment.formattedDate}</span>
+          </div>
+          {/* Muestra los días restantes si no está completada */}
+          {assignment.status !== 'completed' && (
+            <div className="flex items-center gap-1 font-medium text-foreground">
+              <Clock className="w-4 h-4" />
+              <span>{daysText}</span>
+            </div>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// --- Componente Principal de la Página ---
 export const AssignmentsPage: React.FC = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  // Estados de carga y error
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Cargando tareas...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">📝</div>
+          <h2 className="text-2xl font-bold text-foreground mb-2">Acceso requerido</h2>
+          <p className="text-muted-foreground">Debes iniciar sesión para ver tus tareas</p>
+        </div>
+      </div>
+    );
+  }
+
+  // MEJORA: Optimización con useMemo para calcular y ordenar tareas
+  const processedAssignments = useMemo(() => {
+    const today = new Date("2025-10-22T12:00:00"); // Fecha de hoy (simulada para consistencia)
+    today.setHours(0, 0, 0, 0);
+
+    const getDays = (dateString: string) => {
+      const dueDate = new Date(dateString);
+      dueDate.setHours(0, 0, 0, 0);
+      const diffTime = dueDate.getTime() - today.getTime();
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    };
+
+    return assignments
+      .map(task => {
+        const daysUntil = getDays(task.dueDate);
+        return {
+          ...task,
+          daysUntil,
+          formattedDate: formatDate(task.dueDate),
+        };
+      })
+      // Ordena por estado (pendientes/en progreso primero) y luego por fecha
+      .sort((a, b) => {
+        if (a.status === 'completed' && b.status !== 'completed') return 1;
+        if (a.status !== 'completed' && b.status === 'completed') return -1;
+        return a.daysUntil - b.daysUntil;
+      });
+      
+  }, []); // Dependencia vacía ya que 'assignments' es estático
+
+  if (!user) {
+    return <div>Loading...</div>; // O un componente de esqueleto
   }
 
   return (
-    <>
-      <style>{`
-        /* New Burger Menu Styles */
-        #menu-toggle:not(:checked), #menu-toggle:checked {
-          display: none;
-        }
-
-        label {
-          padding: 20px 30px;
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 1000;
-          cursor: pointer;
-        }
-        
-        label:before {
-            top: 25px;
-            left: 20px;
-        }
-        .menu-middle-bar {
-            top: 35px;
-            left: 20px;
-        }
-        label:after {
-            top: 45px;
-            left: 20px;
-        }
-
-        .menu-middle-bar, label:before, label:after {
-          content: " ";
-          position: fixed;
-          width: 30px;
-          height: 4px;
-          background-color: white;
-          border-radius: 2px;
-          transition: .5s ease;
-        }
-
-        #menu {
-          position: fixed;
-          top: 65px;
-          left: 20px;
-          width: 0px;
-          transition: .2s ease;
-          z-index: 999;
-          background-color: white;
-          border-radius: 8px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.26);
-          padding: 0;
-          margin: 0;
-          list-style: none;
-        }
-
-        #menu li {
-          line-height: 0.5;
-          pointer-events: none;
-          opacity: 0;
-          font-family: 'Crimson Pro', serif;
-          font-size: 14pt;
-          color: #0404E4; /* primary-600 */
-          text-decoration: none;
-          padding: 8px 15px;
-        }
-
-        #menu li a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        #menu li a:focus {
-          color: #0303B3; /* primary-700 */
-          font-weight: 700;
-          transition: .2s linear;
-        }
-
-        #menu-toggle:checked + label:before {
-          top: 35px;
-          transform: rotate(45deg);
-        }
-
-        #menu-toggle:checked + label .menu-middle-bar {
-          opacity: 0;
-        }
-
-        #menu-toggle:checked + label:after {
-          top: 35px;
-          transform: rotate(-45deg);
-        }
-
-        #menu-toggle:checked + label + #menu {
-          top: 65px;
-          left: 20px;
-          width: 180px;
-          height: auto;
-          transition: .3s ease .2s;
-          z-index: 1001; /* Ensure menu is on top */
-        }
-
-        #menu-toggle:checked + label + #menu li {
-          pointer-events: all;
-          line-height: 2;
-          opacity: 1;
-          z-index: 1002;
-          transition: .2s ease .3s;
-        }
-      `}</style>
-      <div className="min-h-screen bg-gray-100">
-        {/* Header */}
-        <header className="bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              {/* Left: Hamburger Menu */}
-              <div className="flex items-center relative">
-               <input type="checkbox" id="menu-toggle" />
-               <label htmlFor="menu-toggle">
-                 <div className="menu-middle-bar"></div>
-               </label>
-               <ul id="menu">
-                 <li><Link to="/cursos">Mis Cursos</Link></li>
-                 <li><Link to="/calendario">Calendario</Link></li>
-                 <li><Link to="/tareas">Tareas</Link></li>
-                 <li><Link to="/calificaciones">Calificaciones</Link></li>
-               </ul>
-             </div>
-
-              {/* Center: Welcome Text */}
-              <div className="flex-1 text-center">
-                <h1 className="text-white font-bold text-lg">
-                  Bienvenido, {user.name}
-                </h1>
+    <SidebarProvider>
+      <UserSidebar user={user || undefined} />
+      <SidebarInset>
+        {/* Mobile-First Design: Mejor jerarquía y navegación contextual */}
+        <div className="space-y-6 md:space-y-8 p-4 md:p-6 lg:p-8">
+          {/* Hero Section */}
+          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl p-6 md:p-8 shadow-soft">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold mb-2">Mis Tareas</h1>
+                <p className="text-primary-100 text-sm md:text-base">Gestiona tus tareas y actividades pendientes</p>
               </div>
-
-              {/* Right: Bell Icon and Logo */}
-              <div className="flex items-center space-x-4">
-                <button className="p-2 rounded-md text-white hover:bg-primary-700 transition-colors">
-                  <Bell className="h-5 w-5" />
-                </button>
-                <a href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-                  <img src="/logo.png" alt="Escuela Bíblica Salem" className="h-8 w-8 filter brightness-0 invert" />
-                  <div className="text-white text-sm font-medium">
-                    ESCUELA BÍBLICA<br />SALEM
-                  </div>
-                </a>
+              <div className="text-center md:text-right">
+                <p className="text-primary-200 text-sm">Total de tareas</p>
+                <p className="text-2xl md:text-3xl font-bold">{processedAssignments.length}</p>
               </div>
             </div>
           </div>
-        </header>
 
-        {/* Main Content */}
-        <main className="p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Tareas</h1>
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <p className="text-gray-600">Aquí se mostrarán las tareas pendientes y completadas.</p>
+          {/* Progressive Disclosure: Tabs por estado */}
+          <div className="space-y-4">
+            {/* Tabs para filtrar por estado */}
+            <div className="flex flex-wrap gap-2 border-b border-border pb-4">
+              <button className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm md:text-base">
+                Todas ({processedAssignments.length})
+              </button>
+              <button className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 text-sm md:text-base">
+                Pendientes ({processedAssignments.filter(a => a.status === 'pending').length})
+              </button>
+              <button className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 text-sm md:text-base">
+                En Progreso ({processedAssignments.filter(a => a.status === 'in_progress').length})
+              </button>
+              <button className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 text-sm md:text-base">
+                Completadas ({processedAssignments.filter(a => a.status === 'completed').length})
+              </button>
+            </div>
+
+            {/* Grid con progressive disclosure */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+              {processedAssignments.map((assignment) => (
+                <AssignmentCard key={assignment.id} assignment={assignment} />
+              ))}
+            </div>
           </div>
-        </main>
-      </div>
-    </>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
+
+export default AssignmentsPage;

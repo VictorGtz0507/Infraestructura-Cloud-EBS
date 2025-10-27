@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Users, UserCheck, UserX, Mail, Eye, Edit, Trash2, Search, Filter, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { DataTable } from '../components/DataTable';
-import { Modal } from '../components/Modal';
-import { Alert } from '../components/Alert';
+import { Users, UserCheck, UserX, Eye, Edit, Trash2 } from 'lucide-react';
+import { DataTable } from '../components/ui/DataTable';
+import { Modal } from '../components/ui/Modal';
+import { Alert, AlertTitle, AlertDescription } from '../components/ui/Alert';
+import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
+import { UserSidebar } from '../components/Layout/Sidebar';
+import { useAuth } from '../contexts/AuthContext';
 
 interface User {
   id: number;
@@ -18,6 +20,7 @@ interface User {
 }
 
 export const AdminUsersPage: React.FC = () => {
+  const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([
     {
       id: 1,
@@ -187,12 +190,6 @@ export const AdminUsersPage: React.FC = () => {
     setIsDeleteModalOpen(true);
   };
 
-  const handleRoleChange = (userId: number, newRole: string) => {
-    setUsers(users.map(user =>
-      user.id === userId ? { ...user, role: newRole as User['role'] } : user
-    ));
-    setAlert({ type: 'success', message: 'Rol de usuario actualizado exitosamente' });
-  };
 
   const confirmDelete = () => {
     if (selectedUser) {
@@ -242,23 +239,14 @@ export const AdminUsersPage: React.FC = () => {
   const stats = getStats();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/admin"
-                className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="h-5 w-5 mr-2" />
-                <span className="text-sm font-medium">Regresar</span>
-              </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Gestión de Usuarios</h1>
-                <p className="text-gray-600 mt-1">Administra todos los usuarios de la plataforma</p>
-              </div>
+    <SidebarProvider>
+      <UserSidebar user={user || undefined} />
+      <SidebarInset>
+        <header className="bg-white border-b border-gray-200 px-8 py-4 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Gestión de Usuarios</h1>
+              <p className="text-sm text-gray-600">Administra todos los usuarios de la plataforma</p>
             </div>
             <button
               onClick={() => setIsUserModalOpen(true)}
@@ -268,149 +256,152 @@ export const AdminUsersPage: React.FC = () => {
               Agregar Usuario
             </button>
           </div>
-        </div>
+        </header>
 
-        {/* Alert */}
-        {alert && (
+        <div className="p-8 animate-fade-in">
+          {/* Alert */}
+          {alert && (
+            <div className="mb-6">
+              <Alert
+                variant={alert.type === 'success' ? 'default' : 'destructive'}
+                className="mb-4"
+              >
+                <AlertTitle>{alert.type === 'success' ? 'Éxito' : 'Error'}</AlertTitle>
+                <AlertDescription>{alert.message}</AlertDescription>
+              </Alert>
+            </div>
+          )}
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <Users className="h-8 w-8 text-blue-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Total Usuarios</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <UserCheck className="h-8 w-8 text-green-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Usuarios Activos</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.active}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <UserCheck className="h-8 w-8 text-purple-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Alumnos</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.students}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <UserCheck className="h-8 w-8 text-orange-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Coordinadores</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.teachers}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <UserCheck className="h-8 w-8 text-red-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Administradores</p>
+                  <p className="text-2xl font-bold text-gray-900">{stats.admins}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* User Type Tabs */}
           <div className="mb-6">
-            <Alert
-              type={alert.type}
-              message={alert.message}
-              onClose={() => setAlert(null)}
-              autoClose={true}
-            />
+            <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+              {[
+                { id: 'all', label: 'Todos', count: stats.total },
+                { id: 'students', label: 'Alumnos', count: stats.students },
+                { id: 'teachers', label: 'Coordinadores', count: stats.teachers },
+                { id: 'admins', label: 'Administradores', count: stats.admins }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setUserTab(tab.id as any)}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                    userTab === tab.id
+                      ? 'bg-white text-blue-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {tab.label} ({tab.count})
+                </button>
+              ))}
+            </div>
           </div>
-        )}
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <Users className="h-8 w-8 text-blue-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Usuarios</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+          {/* Users Table */}
+          <DataTable
+            columns={columns}
+            data={filteredUsers}
+            actions={actions}
+            searchable={true}
+            searchPlaceholder="Buscar usuarios..."
+          />
+
+          {/* User Modal */}
+          <Modal
+            isOpen={isUserModalOpen}
+            onClose={() => setIsUserModalOpen(false)}
+            title={selectedUser ? "Editar Usuario" : "Crear Nuevo Usuario"}
+            size="md"
+          >
+            <div className="text-center py-8">
+              <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600">
+                Funcionalidad de {selectedUser ? "edición" : "creación"} de usuarios próximamente
+              </p>
+            </div>
+          </Modal>
+
+          {/* Delete Confirmation Modal */}
+          <Modal
+            isOpen={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            title="Confirmar Eliminación"
+            size="sm"
+          >
+            <div className="text-center">
+              <UserX className="h-12 w-12 text-red-500 mx-auto mb-4" />
+              <p className="text-gray-900 mb-4">
+                ¿Estás seguro de que quieres eliminar al usuario "{selectedUser?.name}"?
+              </p>
+              <p className="text-sm text-gray-600 mb-6">
+                Esta acción no se puede deshacer.
+              </p>
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => setIsDeleteModalOpen(false)}
+                  className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Eliminar
+                </button>
               </div>
             </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <UserCheck className="h-8 w-8 text-green-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Usuarios Activos</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.active}</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <UserCheck className="h-8 w-8 text-purple-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Alumnos</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.students}</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <UserCheck className="h-8 w-8 text-orange-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Coordinadores</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.teachers}</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <UserCheck className="h-8 w-8 text-red-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Administradores</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.admins}</p>
-              </div>
-            </div>
-          </div>
+          </Modal>
         </div>
-
-        {/* User Type Tabs */}
-        <div className="mb-6">
-          <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
-            {[
-              { id: 'all', label: 'Todos', count: stats.total },
-              { id: 'students', label: 'Alumnos', count: stats.students },
-              { id: 'teachers', label: 'Coordinadores', count: stats.teachers },
-              { id: 'admins', label: 'Administradores', count: stats.admins }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setUserTab(tab.id as any)}
-                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                  userTab === tab.id
-                    ? 'bg-white text-blue-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {tab.label} ({tab.count})
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Users Table */}
-        <DataTable
-          columns={columns}
-          data={filteredUsers}
-          actions={actions}
-          searchable={true}
-          searchPlaceholder="Buscar usuarios..."
-        />
-
-        {/* User Modal */}
-        <Modal
-          isOpen={isUserModalOpen}
-          onClose={() => setIsUserModalOpen(false)}
-          title={selectedUser ? "Editar Usuario" : "Crear Nuevo Usuario"}
-          size="md"
-        >
-          <div className="text-center py-8">
-            <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">
-              Funcionalidad de {selectedUser ? "edición" : "creación"} de usuarios próximamente
-            </p>
-          </div>
-        </Modal>
-
-        {/* Delete Confirmation Modal */}
-        <Modal
-          isOpen={isDeleteModalOpen}
-          onClose={() => setIsDeleteModalOpen(false)}
-          title="Confirmar Eliminación"
-          size="sm"
-        >
-          <div className="text-center">
-            <UserX className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <p className="text-gray-900 mb-4">
-              ¿Estás seguro de que quieres eliminar al usuario "{selectedUser?.name}"?
-            </p>
-            <p className="text-sm text-gray-600 mb-6">
-              Esta acción no se puede deshacer.
-            </p>
-            <div className="flex space-x-3">
-              <button
-                onClick={() => setIsDeleteModalOpen(false)}
-                className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={confirmDelete}
-                className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Eliminar
-              </button>
-            </div>
-          </div>
-        </Modal>
-      </div>
-    </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };

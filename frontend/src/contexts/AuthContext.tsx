@@ -9,7 +9,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<{success: boolean, error?: string}>;
   logout: () => void;
   loading: boolean;
 }
@@ -45,7 +45,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<{success: boolean, error?: string}> => {
+    // Validación básica
+    if (!email.includes('@')) {
+      return { success: false, error: 'Email inválido' };
+    }
+
+    if (password.length < 6) {
+      return { success: false, error: 'La contraseña debe tener al menos 6 caracteres' };
+    }
+
     // Credenciales del administrador
     const adminCredentials = {
       email: 'admin@ebsalem.com',
@@ -58,34 +67,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       password: 'ivan123'
     };
 
-    // Simular validación con delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    setLoading(true);
 
-    if (email === adminCredentials.email && password === adminCredentials.password) {
-      const userData: User = {
-        name: 'Administrador',
-        role: 'admin',
-        email: email
-      };
+    try {
+      // Simular validación con delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      setUser(userData);
-      localStorage.setItem('ebsalem_user', JSON.stringify(userData));
-      return true;
+      if (email === adminCredentials.email && password === adminCredentials.password) {
+        const userData: User = {
+          name: 'Administrador',
+          role: 'admin',
+          email: email
+        };
+
+        setUser(userData);
+        localStorage.setItem('ebsalem_user', JSON.stringify(userData));
+        return { success: true };
+      }
+
+      if (email === studentCredentials.email && password === studentCredentials.password) {
+        const userData: User = {
+          name: 'Ivan Alvarez',
+          role: 'student',
+          email: email
+        };
+
+        setUser(userData);
+        localStorage.setItem('ebsalem_user', JSON.stringify(userData));
+        return { success: true };
+      }
+
+      return { success: false, error: 'Credenciales incorrectas. Verifica tu email y contraseña.' };
+    } catch (error) {
+      return { success: false, error: 'Error de conexión. Inténtalo de nuevo.' };
+    } finally {
+      setLoading(false);
     }
-
-    if (email === studentCredentials.email && password === studentCredentials.password) {
-      const userData: User = {
-        name: 'Ivan Alvarez',
-        role: 'student',
-        email: email
-      };
-
-      setUser(userData);
-      localStorage.setItem('ebsalem_user', JSON.stringify(userData));
-      return true;
-    }
-
-    return false;
   };
 
   const logout = () => {

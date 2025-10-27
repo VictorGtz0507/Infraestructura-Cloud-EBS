@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Eye, BookOpen, Users, Calendar, Settings, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { DataTable } from '../components/DataTable';
-import { Modal } from '../components/Modal';
-import { Alert } from '../components/Alert';
+import { Plus, Edit, Trash2, Eye, BookOpen, Users, Calendar, Settings } from 'lucide-react';
+import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
+import { UserSidebar } from '../components/Layout/Sidebar';
+import { DataTable } from '../components/ui/DataTable';
+import { Modal } from '../components/ui/Modal';
+import { Alert, AlertTitle, AlertDescription } from '../components/ui/Alert';
+import { useAuth } from '../contexts/AuthContext';
 
 interface Course {
   id: number;
@@ -17,6 +19,7 @@ interface Course {
 }
 
 export const AdminCoursesPage: React.FC = () => {
+  const { user } = useAuth();
   const [courses, setCourses] = useState<Course[]>([
     {
       id: 1,
@@ -161,23 +164,14 @@ export const AdminCoursesPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/admin"
-                className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="h-5 w-5 mr-2" />
-                <span className="text-sm font-medium">Regresar</span>
-              </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Gestión de Cursos</h1>
-                <p className="text-gray-600 mt-1">Administra todos los cursos de la plataforma</p>
-              </div>
+    <SidebarProvider>
+      <UserSidebar user={user || undefined} />
+      <SidebarInset>
+        <header className="bg-white border-b border-gray-200 px-8 py-4 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Gestión de Cursos</h1>
+              <p className="text-sm text-gray-600">Administra todos los cursos de la plataforma</p>
             </div>
             <button
               onClick={handleCreateCourse}
@@ -187,133 +181,136 @@ export const AdminCoursesPage: React.FC = () => {
               Nuevo Curso
             </button>
           </div>
-        </div>
+        </header>
 
-        {/* Alert */}
-        {alert && (
-          <div className="mb-6">
-            <Alert
-              type={alert.type}
-              message={alert.message}
-              onClose={() => setAlert(null)}
-              autoClose={true}
-            />
-          </div>
-        )}
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <BookOpen className="h-8 w-8 text-blue-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Cursos</p>
-                <p className="text-2xl font-bold text-gray-900">{courses.length}</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <Users className="h-8 w-8 text-green-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Estudiantes</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {courses.reduce((sum, course) => sum + course.students, 0)}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <Settings className="h-8 w-8 text-purple-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Cursos Activos</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {courses.filter(c => c.status === 'Publicado').length}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <div className="flex items-center">
-              <Calendar className="h-8 w-8 text-orange-600" />
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Cursos en Borrador</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {courses.filter(c => c.status === 'Borrador').length}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Courses Table */}
-        <DataTable
-          columns={columns}
-          data={courses}
-          actions={actions}
-          searchable={true}
-          searchPlaceholder="Buscar cursos..."
-        />
-
-        {/* Create Course Modal */}
-        <Modal
-          isOpen={isCreateModalOpen}
-          onClose={() => setIsCreateModalOpen(false)}
-          title="Crear Nuevo Curso"
-          size="lg"
-        >
-          <div className="text-center py-8">
-            <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">Funcionalidad de creación de cursos próximamente</p>
-          </div>
-        </Modal>
-
-        {/* Edit Course Modal */}
-        <Modal
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          title="Editar Curso"
-          size="lg"
-        >
-          <div className="text-center py-8">
-            <Edit className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">Funcionalidad de edición de cursos próximamente</p>
-          </div>
-        </Modal>
-
-        {/* Delete Confirmation Modal */}
-        <Modal
-          isOpen={isDeleteModalOpen}
-          onClose={() => setIsDeleteModalOpen(false)}
-          title="Confirmar Eliminación"
-          size="sm"
-        >
-          <div className="text-center">
-            <Trash2 className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <p className="text-gray-900 mb-4">
-              ¿Estás seguro de que quieres eliminar el curso "{selectedCourse?.name}"?
-            </p>
-            <p className="text-sm text-gray-600 mb-6">
-              Esta acción no se puede deshacer.
-            </p>
-            <div className="flex space-x-3">
-              <button
-                onClick={() => setIsDeleteModalOpen(false)}
-                className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+        <div className="p-8 animate-fade-in">
+          {/* Alert */}
+          {alert && (
+            <div className="mb-6">
+              <Alert
+                variant={alert.type === 'success' ? 'default' : 'destructive'}
+                className="mb-4"
               >
-                Cancelar
-              </button>
-              <button
-                onClick={confirmDelete}
-                className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Eliminar
-              </button>
+                <AlertTitle>{alert.type === 'success' ? 'Éxito' : 'Error'}</AlertTitle>
+                <AlertDescription>{alert.message}</AlertDescription>
+              </Alert>
+            </div>
+          )}
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <BookOpen className="h-8 w-8 text-blue-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Total Cursos</p>
+                  <p className="text-2xl font-bold text-gray-900">{courses.length}</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <Users className="h-8 w-8 text-green-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Total Estudiantes</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {courses.reduce((sum, course) => sum + course.students, 0)}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <Settings className="h-8 w-8 text-purple-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Cursos Activos</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {courses.filter(c => c.status === 'Publicado').length}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <div className="flex items-center">
+                <Calendar className="h-8 w-8 text-orange-600" />
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">Cursos en Borrador</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {courses.filter(c => c.status === 'Borrador').length}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </Modal>
-      </div>
-    </div>
+
+          {/* Courses Table */}
+          <DataTable
+            columns={columns}
+            data={courses}
+            actions={actions}
+            searchable={true}
+            searchPlaceholder="Buscar cursos..."
+          />
+
+          {/* Create Course Modal */}
+          <Modal
+            isOpen={isCreateModalOpen}
+            onClose={() => setIsCreateModalOpen(false)}
+            title="Crear Nuevo Curso"
+            size="lg"
+          >
+            <div className="text-center py-8">
+              <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600">Funcionalidad de creación de cursos próximamente</p>
+            </div>
+          </Modal>
+
+          {/* Edit Course Modal */}
+          <Modal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            title="Editar Curso"
+            size="lg"
+          >
+            <div className="text-center py-8">
+              <Edit className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600">Funcionalidad de edición de cursos próximamente</p>
+            </div>
+          </Modal>
+
+          {/* Delete Confirmation Modal */}
+          <Modal
+            isOpen={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            title="Confirmar Eliminación"
+            size="sm"
+          >
+            <div className="text-center">
+              <Trash2 className="h-12 w-12 text-red-500 mx-auto mb-4" />
+              <p className="text-gray-900 mb-4">
+                ¿Estás seguro de que quieres eliminar el curso "{selectedCourse?.name}"?
+              </p>
+              <p className="text-sm text-gray-600 mb-6">
+                Esta acción no se puede deshacer.
+              </p>
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => setIsDeleteModalOpen(false)}
+                  className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </Modal>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };

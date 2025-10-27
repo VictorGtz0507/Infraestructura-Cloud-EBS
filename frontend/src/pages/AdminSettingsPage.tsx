@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Settings, Mail, Users, Shield, Database, Save, Edit, Eye, EyeOff, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { Alert } from '../components/Alert';
+import { Settings, Mail, Users, Shield, Database, Save, Edit, Eye, EyeOff } from 'lucide-react';
+import { Alert, AlertTitle, AlertDescription } from '../components/ui/Alert';
+import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
+import { UserSidebar } from '../components/Layout/Sidebar';
+import { useAuth } from '../contexts/AuthContext';
 
 interface EmailTemplate {
   id: string;
@@ -12,9 +14,15 @@ interface EmailTemplate {
 }
 
 export const AdminSettingsPage: React.FC = () => {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'general' | 'emails' | 'admins' | 'system'>('general');
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check if user has a preference stored
+    const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   // Mock data
   const [emailTemplates, setEmailTemplates] = useState<EmailTemplate[]>([
@@ -52,6 +60,27 @@ export const AdminSettingsPage: React.FC = () => {
   const handleSaveSettings = () => {
     setAlert({ type: 'success', message: 'Configuración guardada exitosamente' });
   };
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
+
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
+  // Apply dark mode on component mount
+  React.useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   const handleSaveTemplate = (template: EmailTemplate) => {
     setEmailTemplates(templates =>
@@ -130,6 +159,18 @@ export const AdminSettingsPage: React.FC = () => {
             />
             <label htmlFor="maintenance" className="ml-2 block text-sm text-gray-900">
               Modo de Mantenimiento (Los usuarios no podrán acceder)
+            </label>
+          </div>
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="darkMode"
+              checked={darkMode}
+              onChange={toggleDarkMode}
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+            <label htmlFor="darkMode" className="ml-2 block text-sm text-gray-900">
+              Modo Oscuro
             </label>
           </div>
         </div>
@@ -322,23 +363,14 @@ export const AdminSettingsPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/admin"
-                className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="h-5 w-5 mr-2" />
-                <span className="text-sm font-medium">Regresar</span>
-              </Link>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Configuración</h1>
-                <p className="text-gray-600 mt-1">Administra la configuración general de la plataforma</p>
-              </div>
+    <SidebarProvider>
+      <UserSidebar user={user || undefined} />
+      <SidebarInset>
+        <header className="bg-white border-b border-gray-200 px-8 py-4 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Configuración</h1>
+              <p className="text-sm text-gray-600">Administra la configuración general de la plataforma</p>
             </div>
             <button
               onClick={handleSaveSettings}
@@ -348,17 +380,19 @@ export const AdminSettingsPage: React.FC = () => {
               Guardar Cambios
             </button>
           </div>
-        </div>
+        </header>
+        <div className="p-8 animate-fade-in">
 
         {/* Alert */}
         {alert && (
           <div className="mb-6">
             <Alert
-              type={alert.type}
-              message={alert.message}
-              onClose={() => setAlert(null)}
-              autoClose={true}
-            />
+              variant={alert.type === 'success' ? 'default' : 'destructive'}
+              className="mb-4"
+            >
+              <AlertTitle>{alert.type === 'success' ? 'Éxito' : 'Error'}</AlertTitle>
+              <AlertDescription>{alert.message}</AlertDescription>
+            </Alert>
           </div>
         )}
 
@@ -443,7 +477,8 @@ export const AdminSettingsPage: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
-    </div>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };

@@ -5,38 +5,75 @@ import { useAuth } from '../contexts/AuthContext';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<{email?: string, password?: string}>({});
   const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Validación en tiempo real
+    validateField(name, value);
+  };
+
+  const validateField = (name: string, value: string) => {
+    const newErrors = {...errors};
+
+    if (name === 'email') {
+      if (!value) {
+        newErrors.email = 'El email es requerido';
+      } else if (!value.includes('@')) {
+        newErrors.email = 'Email inválido';
+      } else {
+        delete newErrors.email;
+      }
+    }
+
+    if (name === 'password') {
+      if (!value) {
+        newErrors.password = 'La contraseña es requerida';
+      } else if (value.length < 6) {
+        newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    setErrors(newErrors);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError('');
-    
+
+    // Validación final antes del envío
+    const finalErrors: {email?: string, password?: string} = {};
+    if (!formData.email) finalErrors.email = 'El email es requerido';
+    if (!formData.password) finalErrors.password = 'La contraseña es requerida';
+
+    if (Object.keys(finalErrors).length > 0) {
+      setErrors(finalErrors);
+      return;
+    }
+
     try {
-      const success = await login(formData.email, formData.password);
-      if (success) {
+      const result = await login(formData.email, formData.password);
+      if (result.success) {
         navigate('/dashboard');
       } else {
-        setError('Credenciales incorrectas. Usa: admin@ebsalem.com / admin123 o ivan@ebsalem.com / ivan123');
+        setError(result.error || 'Error desconocido');
       }
     } catch (error) {
       setError('Error al iniciar sesión. Inténtalo de nuevo.');
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -44,10 +81,11 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 relative">
       <div className="absolute top-4 left-4 z-10">
         <button
-          onClick={() => window.history.back()}
+          onClick={() => navigate('/dashboard')}
           className="bg-white shadow-sm border border-gray-200 px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 transition-colors flex items-center"
+          aria-label="Ir al dashboard"
         >
-          <span>&larr;</span> Regresar
+          <span>&larr;</span> Dashboard
         </button>
       </div>
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -59,29 +97,25 @@ export const LoginPage: React.FC = () => {
           <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
             Iniciar Sesión
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            ¿No tienes una cuenta?{' '}
-            <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500">
-              Regístrate aquí
-            </Link>
-          </p>
-          
-          {/* Credenciales de Prueba */}
-          <div className="mt-4 bg-primary-50 border border-primary-200 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-primary-900 mb-2">Credenciales de Prueba:</h3>
-            <div className="text-sm text-primary-800 space-y-2">
-              <div>
-                <p><strong>Administrador:</strong></p>
-                <p>Email: admin@ebsalem.com</p>
-                <p>Contraseña: admin123</p>
-              </div>
-              <div>
-                <p><strong>Estudiante:</strong></p>
-                <p>Email: ivan@ebsalem.com</p>
-                <p>Contraseña: ivan123</p>
+
+          {/* Credenciales de Prueba - Solo en desarrollo */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="mt-4 bg-primary-50 border border-primary-200 rounded-lg p-4">
+              <h3 className="text-sm font-medium text-primary-900 mb-2">Credenciales de Prueba:</h3>
+              <div className="text-sm text-primary-800 space-y-2">
+                <div>
+                  <p><strong>Administrador:</strong></p>
+                  <p>Email: admin@ebsalem.com</p>
+                  <p>Contraseña: admin123</p>
+                </div>
+                <div>
+                  <p><strong>Estudiante:</strong></p>
+                  <p>Email: ivan@ebsalem.com</p>
+                  <p>Contraseña: ivan123</p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         
         {/* Error Message */}
@@ -111,7 +145,14 @@ export const LoginPage: React.FC = () => {
                   placeholder="tu@email.com"
                   value={formData.email}
                   onChange={handleChange}
+                  aria-describedby={errors.email ? "email-error" : undefined}
+                  aria-invalid={!!errors.email}
                 />
+                {errors.email && (
+                  <p id="email-error" className="text-red-600 text-sm mt-1" role="alert">
+                    {errors.email}
+                  </p>
+                )}
               </div>
             </div>
             
@@ -133,7 +174,14 @@ export const LoginPage: React.FC = () => {
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={handleChange}
+                  aria-describedby={errors.password ? "password-error" : undefined}
+                  aria-invalid={!!errors.password}
                 />
+                {errors.password && (
+                  <p id="password-error" className="text-red-600 text-sm mt-1" role="alert">
+                    {errors.password}
+                  </p>
+                )}
                 <button
                   type="button"
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
@@ -172,10 +220,10 @@ export const LoginPage: React.FC = () => {
           <div>
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={loading}
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isLoading ? (
+              {loading ? (
                 <div className="flex items-center">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                   Iniciando sesión...

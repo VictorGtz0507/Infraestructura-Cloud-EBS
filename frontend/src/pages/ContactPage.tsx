@@ -34,23 +34,14 @@ export const ContactPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="flex justify-between items-start mb-12">
-          <button
-            onClick={() => window.history.back()}
-            className="bg-white shadow-sm border border-gray-200 px-3 py-2 rounded-lg text-gray-700 hover:text-gray-900 transition-colors flex items-center"
-          >
-            <span>&larr;</span> Regresar
-          </button>
-          <div className="text-center flex-1">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Contáctanos
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              ¿Tienes preguntas sobre nuestros cursos bíblicos? ¿Quieres formar parte de nuestra comunidad?
-              Estamos aquí para ayudarte en tu formación espiritual.
-            </p>
-          </div>
-          <div className="w-20"></div> {/* Spacer for centering */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Contáctanos
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            ¿Tienes preguntas sobre nuestros cursos bíblicos? ¿Quieres formar parte de nuestra comunidad?
+            Estamos aquí para ayudarte en tu formación espiritual.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

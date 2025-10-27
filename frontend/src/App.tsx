@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Layout } from './components/Layout';
+import { Layout } from './components/Layout/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { DashboardPage } from './pages/DashboardPage';
+import Dashboard from './pages/Dashboard';
 import { ContactPage } from './pages/ContactPage';
 import { AboutPage } from './pages/AboutPage';
 import { AdminDashboard } from './pages/AdminDashboard';
@@ -14,52 +13,44 @@ import { AdminCoursesPage } from './pages/AdminCoursesPage';
 import { AdminUsersPage } from './pages/AdminUsersPage';
 import { AdminReportsPage } from './pages/AdminReportsPage';
 import { AdminSettingsPage } from './pages/AdminSettingsPage';
-import { CoursesPage } from './pages/CoursesPage';
-import { CalendarPage } from './pages/CalendarPage';
+import Courses from './pages/Courses';
+import Calendar from './pages/Calendar';
 import { AssignmentsPage } from './pages/AssignmentsPage';
-import { GradesPage } from './pages/GradesPage';
+import Grades from './pages/Grades';
 
 // Componente interno que usa el contexto de autenticación
 const AppRoutes: React.FC = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Router>
       <Routes>
         {/* Public routes */}
-        <Route 
-          path="/" 
-          element={
-            <Layout>
-              <LandingPage />
-            </Layout>
-          } 
-        />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route 
-          path="/contact" 
+        <Route
+          path="/contact"
           element={
             <Layout>
               <ContactPage />
             </Layout>
-          } 
+          }
         />
-        <Route 
-          path="/about" 
+        <Route
+          path="/about"
           element={
             <Layout>
               <AboutPage />
             </Layout>
-          } 
+          }
         />
 
         {/* Protected routes */}
-        <Route 
+        <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
-              {user?.role === 'admin' ? <AdminDashboard /> : <DashboardPage />}
+              {user?.role === 'admin' ? <Navigate to="/admin" replace /> : (user && <Layout user={user} showSidebar={true}><Dashboard /></Layout>)}
             </ProtectedRoute>
           }
         />
@@ -69,7 +60,9 @@ const AppRoutes: React.FC = () => {
           path="/admin"
           element={
             <ProtectedRoute requiredRole="admin">
-              <AdminDashboard />
+              {user && <Layout user={user} showSidebar={true}>
+                <AdminDashboard />
+              </Layout>}
             </ProtectedRoute>
           }
         />
@@ -77,7 +70,9 @@ const AppRoutes: React.FC = () => {
           path="/admin/cursos"
           element={
             <ProtectedRoute requiredRole="admin">
-              <AdminCoursesPage />
+              {user && <Layout user={user} showSidebar={true}>
+                <AdminCoursesPage />
+              </Layout>}
             </ProtectedRoute>
           }
         />
@@ -85,7 +80,9 @@ const AppRoutes: React.FC = () => {
           path="/admin/usuarios"
           element={
             <ProtectedRoute requiredRole="admin">
-              <AdminUsersPage />
+              {user && <Layout user={user} showSidebar={true}>
+                <AdminUsersPage />
+              </Layout>}
             </ProtectedRoute>
           }
         />
@@ -93,7 +90,9 @@ const AppRoutes: React.FC = () => {
           path="/admin/reportes"
           element={
             <ProtectedRoute requiredRole="admin">
-              <AdminReportsPage />
+              {user && <Layout user={user} showSidebar={true}>
+                <AdminReportsPage />
+              </Layout>}
             </ProtectedRoute>
           }
         />
@@ -101,16 +100,18 @@ const AppRoutes: React.FC = () => {
           path="/admin/configuracion"
           element={
             <ProtectedRoute requiredRole="admin">
-              <AdminSettingsPage />
+              {user && <Layout user={user} showSidebar={true}>
+                <AdminSettingsPage />
+              </Layout>}
             </ProtectedRoute>
           }
         />
 
-        {/* Placeholder routes for sidebar navigation */}
-        <Route path="/cursos" element={<ProtectedRoute><CoursesPage /></ProtectedRoute>} />
-        <Route path="/calendario" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
-        <Route path="/tareas" element={<ProtectedRoute><AssignmentsPage /></ProtectedRoute>} />
-        <Route path="/calificaciones" element={<ProtectedRoute><GradesPage /></ProtectedRoute>} />
+        {/* Student routes */}
+        <Route path="/cursos" element={<ProtectedRoute>{user && <Layout user={user} showSidebar={true}><Courses /></Layout>}</ProtectedRoute>} />
+        <Route path="/calendario" element={<ProtectedRoute>{user && <Layout user={user} showSidebar={true}><Calendar /></Layout>}</ProtectedRoute>} />
+        <Route path="/tareas" element={<ProtectedRoute>{user && <Layout user={user} showSidebar={true}><AssignmentsPage /></Layout>}</ProtectedRoute>} />
+        <Route path="/calificaciones" element={<ProtectedRoute>{user && <Layout user={user} showSidebar={true}><Grades /></Layout>}</ProtectedRoute>} />
 
         {/* Catch all route */}
         <Route path="*" element={<Navigate to="/" replace />} />
