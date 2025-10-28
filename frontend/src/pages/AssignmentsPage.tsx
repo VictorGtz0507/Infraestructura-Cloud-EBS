@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react'; // MEJORA: Importar useMemo
+import React, { useMemo, useState } from 'react'; // MEJORA: Importar useMemo y useState
 import { useAuth } from '../contexts/AuthContext';
-import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
-import { UserSidebar } from '../components/Layout/Sidebar';
+import { SidebarProvider, SidebarInset, UserSidebar } from '../components/Layout/Sidebar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../components/ui/Dialog';
 import { Calendar, Clock, AlertCircle, CheckCircle } from 'lucide-react';
 
 // --- MEJORA: Tipado de datos ---
@@ -139,8 +139,8 @@ const formatDate = (dateString: string) => {
 };
 
 // --- MEJORA: Componente de Tarjeta de Tarea (DRY) ---
-const AssignmentCard: React.FC<{ assignment: ProcessedAssignment }> = ({ assignment }) => {
-  
+const AssignmentCard: React.FC<{ assignment: ProcessedAssignment; onClick: () => void }> = ({ assignment, onClick }) => {
+
   const daysText =
     assignment.daysUntil < 0
       ? "Vencida"
@@ -151,7 +151,7 @@ const AssignmentCard: React.FC<{ assignment: ProcessedAssignment }> = ({ assignm
       : `Vence en ${assignment.daysUntil} días`;
 
   return (
-    <Card className="hover:shadow-lg transition-all duration-300 flex flex-col">
+    <Card className="hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer" onClick={onClick}>
       <CardHeader>
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-start gap-3">
@@ -196,6 +196,8 @@ const AssignmentCard: React.FC<{ assignment: ProcessedAssignment }> = ({ assignm
 // --- Componente Principal de la Página ---
 export const AssignmentsPage: React.FC = () => {
   const { user, loading } = useAuth();
+  const [selectedAssignment, setSelectedAssignment] = useState<ProcessedAssignment | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Estados de carga y error
   if (loading) {
@@ -296,12 +298,138 @@ export const AssignmentsPage: React.FC = () => {
             {/* Grid con progressive disclosure */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
               {processedAssignments.map((assignment) => (
-                <AssignmentCard key={assignment.id} assignment={assignment} />
+                <AssignmentCard
+                  key={assignment.id}
+                  assignment={assignment}
+                  onClick={() => {
+                    setSelectedAssignment(assignment);
+                    setIsDialogOpen(true);
+                  }}
+                />
               ))}
             </div>
           </div>
         </div>
       </SidebarInset>
+
+      {/* Dialog para visualización de tarea */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              {selectedAssignment && getStatusIcon(selectedAssignment.status)}
+              {selectedAssignment?.title}
+            </DialogTitle>
+            <DialogDescription>
+              {selectedAssignment?.course}
+            </DialogDescription>
+          </DialogHeader>
+
+          {selectedAssignment && (
+            <div className="space-y-6">
+              {/* Información básica */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Estado</h4>
+                  <Badge variant={getStatusVariant(selectedAssignment.status)} className="w-fit">
+                    {getStatusText(selectedAssignment.status)}
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Prioridad</h4>
+                  <Badge variant={getPriorityVariant(selectedAssignment.priority)} className="w-fit">
+                    {getPriorityText(selectedAssignment.priority)}
+                  </Badge>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Fecha de entrega</h4>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span>{selectedAssignment.formattedDate}</span>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Tiempo restante</h4>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-muted-foreground" />
+                    <span className={selectedAssignment.daysUntil < 0 ? "text-destructive" : selectedAssignment.daysUntil <= 2 ? "text-warning" : "text-foreground"}>
+                      {selectedAssignment.daysUntil < 0
+                        ? "Vencida"
+                        : selectedAssignment.daysUntil === 0
+                        ? "Vence Hoy"
+                        : selectedAssignment.daysUntil === 1
+                        ? "Vence Mañana"
+                        : `Vence en ${selectedAssignment.daysUntil} días`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Descripción detallada */}
+              <div className="space-y-2">
+                <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide">Descripción</h4>
+                <p className="text-foreground leading-relaxed">{selectedAssignment.description}</p>
+              </div>
+
+              {/* Detalles de la Tarea */}
+              <div className="border rounded-lg p-4 bg-muted/50">
+                <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-4">Detalles de la Tarea</h4>
+                <div className="space-y-4">
+                  {/* Sección de objetivos */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <h5 className="font-medium text-sm">Objetivos de Aprendizaje</h5>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• Comprender el contexto histórico del capítulo</li>
+                        <li>• Analizar los temas principales</li>
+                        <li>• Aplicar los principios a la vida cotidiana</li>
+                      </ul>
+                    </div>
+                    <div className="space-y-2">
+                      <h5 className="font-medium text-sm">Recursos Requeridos</h5>
+                      <ul className="text-sm text-muted-foreground space-y-1">
+                        <li>• Biblia Reina-Valera 1960</li>
+                        <li>• Comentarios bíblicos</li>
+                        <li>• Material de estudio proporcionado</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Sección de progreso (si aplica) */}
+                  {selectedAssignment.status === 'in_progress' && (
+                    <div className="space-y-2">
+                      <h5 className="font-medium text-sm">Progreso Actual</h5>
+                      <div className="w-full bg-muted rounded-full h-2">
+                        <div className="bg-primary h-2 rounded-full" style={{ width: '45%' }}></div>
+                      </div>
+                      <p className="text-xs text-muted-foreground">45% completado</p>
+                    </div>
+                  )}
+
+                  {/* Sección de notas o comentarios */}
+                  <div className="space-y-2">
+                    <h5 className="font-medium text-sm">Notas Adicionales</h5>
+                    <p className="text-sm text-muted-foreground">
+                      Recuerda incluir referencias bíblicas específicas y citar fuentes cuando sea necesario.
+                      La extensión mínima es de 1500 palabras.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Acciones */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
+                <button className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                  Entrar Intento
+                </button>
+                <button className="flex-1 border border-input bg-background hover:bg-accent hover:text-accent-foreground px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                  Marcar Como Hecha
+                </button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </SidebarProvider>
   );
 };

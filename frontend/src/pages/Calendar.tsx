@@ -1,5 +1,4 @@
-import { SidebarProvider, SidebarInset } from "../components/ui/sidebar";
-import { UserSidebar } from "../components/Layout/Sidebar";
+import { SidebarProvider, SidebarInset, UserSidebar } from "../components/Layout/Sidebar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";

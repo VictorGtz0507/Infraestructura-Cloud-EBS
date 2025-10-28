@@ -3,8 +3,7 @@ import { Users, UserCheck, UserX, Eye, Edit, Trash2 } from 'lucide-react';
 import { DataTable } from '../components/ui/DataTable';
 import { Modal } from '../components/ui/Modal';
 import { Alert, AlertTitle, AlertDescription } from '../components/ui/Alert';
-import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
-import { UserSidebar } from '../components/Layout/Sidebar';
+import { SidebarProvider, SidebarInset, UserSidebar } from '../components/Layout/Sidebar';
 import { useAuth } from '../contexts/AuthContext';
 
 interface User {

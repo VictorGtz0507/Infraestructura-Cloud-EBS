@@ -15,8 +15,7 @@ import {
   Server,
   CheckCircle
 } from 'lucide-react';
-import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
-import { UserSidebar } from '../components/Layout/Sidebar';
+import { SidebarProvider, SidebarInset, UserSidebar } from '../components/Layout/Sidebar';
 import { StatCard } from '../components/Dashboard/StatCard';
 import { CourseForm } from '../components/forms/CourseForm';
 import { UserForm } from '../components/forms/UserForm';

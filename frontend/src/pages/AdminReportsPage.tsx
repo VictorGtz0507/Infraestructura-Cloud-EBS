@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { BarChart3, TrendingUp, Users, BookOpen, Download } from 'lucide-react';
 import { StatCard } from '../components/Dashboard/StatCard';
-import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
-import { UserSidebar } from '../components/Layout/Sidebar';
+import { SidebarProvider, SidebarInset, UserSidebar } from '../components/Layout/Sidebar';
 import { useAuth } from '../contexts/AuthContext';
 
 interface CourseReport {

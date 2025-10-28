@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2, Eye, BookOpen, Users, Calendar, Settings } from 'lucide-react';
-import { SidebarProvider, SidebarInset } from '../components/ui/sidebar';
-import { UserSidebar } from '../components/Layout/Sidebar';
+import { SidebarProvider, SidebarInset, UserSidebar } from '../components/Layout/Sidebar';
 import { DataTable } from '../components/ui/DataTable';
 import { Modal } from '../components/ui/Modal';
 import { Alert, AlertTitle, AlertDescription } from '../components/ui/Alert';
